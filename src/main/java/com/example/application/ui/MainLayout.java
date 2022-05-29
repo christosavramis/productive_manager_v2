@@ -100,7 +100,7 @@ public class MainLayout extends AppLayout {
         image.setHeight(50, Unit.PIXELS);
         image.setWidth(50, Unit.PIXELS);
 
-        HorizontalLayout logoName = new HorizontalLayout(image, new Span("Audits"));
+        HorizontalLayout logoName = new HorizontalLayout(image, new Span("Reports"));
         logoName.setAlignItems(FlexComponent.Alignment.CENTER);
 
         return new AccordionPanel(temporaryCSSForLinks(logoName), createContent(
