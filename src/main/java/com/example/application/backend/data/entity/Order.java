@@ -40,4 +40,14 @@ public class Order extends AbstractEntity {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Order{" +
+                "customer=" + customer +
+                ", timeOrdered=" + timeOrdered +
+                ", status=" + status +
+                ", price=" + price +
+                ", products=" + products +
+                '}';
+    }
 }

@@ -104,7 +104,7 @@ public class AbstractCrudView<T> extends VerticalLayout {
             abstractService.save(event.getFormObject());
             updateList();
             genericForm.updateChildItemsOnStateChange();
-            auditService.save(new Audit("Guest", LocalDate.now(), "Saved item successfully", AuditType.ERROR), this.getClass());
+            auditService.save(new Audit("Guest", LocalDate.now(), "Saved item successfully", AuditType.INFO), this.getClass());
             closeEditor();
         } catch (DuplicateFieldException e) {
             auditService.save(new Audit("Guest", LocalDate.now(), e.getMessage(), AuditType.ERROR), this.getClass());

@@ -1,9 +1,6 @@
 package com.example.application.ui;
 
-import com.example.application.ui.views.CategoryView;
-import com.example.application.ui.views.OrderView;
-import com.example.application.ui.views.ProductView;
-import com.example.application.ui.views.TaxView;
+import com.example.application.ui.views.*;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasStyle;
@@ -13,7 +10,6 @@ import com.vaadin.flow.component.accordion.Accordion;
 import com.vaadin.flow.component.accordion.AccordionPanel;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
@@ -86,7 +82,7 @@ public class MainLayout extends AppLayout {
         );
     }
 
-    private AccordionPanel AccordionPanelOrdering() {
+    private AccordionPanel accordionPanelOrdering() {
         Image image = new Image("images/ordering.png", "Orders");
         image.setHeight(50, Unit.PIXELS);
         image.setWidth(50, Unit.PIXELS);
@@ -95,7 +91,20 @@ public class MainLayout extends AppLayout {
         logoName.setAlignItems(FlexComponent.Alignment.CENTER);
 
         return new AccordionPanel(temporaryCSSForLinks(logoName), createContent(
-                createDrawer("Orders", VaadinIcon.OFFICE, OrderView.class)
+                createDrawer("Orders", VaadinIcon.CART, OrderView.class)
+        ));
+    }
+
+    private AccordionPanel accordionPanelReports() {
+        Image image = new Image("images/reports.png", "Audits");
+        image.setHeight(50, Unit.PIXELS);
+        image.setWidth(50, Unit.PIXELS);
+
+        HorizontalLayout logoName = new HorizontalLayout(image, new Span("Audits"));
+        logoName.setAlignItems(FlexComponent.Alignment.CENTER);
+
+        return new AccordionPanel(temporaryCSSForLinks(logoName), createContent(
+                createDrawer("Audits", VaadinIcon.RECORDS, AuditView.class)
         ));
     }
 
@@ -103,7 +112,8 @@ public class MainLayout extends AppLayout {
         Accordion accordion = new Accordion();
         accordion.getStyle().set("padding-left", "10px");
         accordion.add(AccordionPanelInventory());
-        accordion.add(AccordionPanelOrdering());
+        accordion.add(accordionPanelOrdering());
+        accordion.add(accordionPanelReports());
         addToDrawer(accordion);
     }
 

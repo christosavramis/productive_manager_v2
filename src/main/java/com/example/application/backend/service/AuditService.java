@@ -9,22 +9,32 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
-public class AuditService extends AbstractService<Audit> {
+public class AuditService {
     private @Autowired NotificationManager notificationManager;
+    private AuditRepository auditRepository;
     public AuditService(AuditRepository repository) {
-        super(repository);
+        this.auditRepository = repository;
+    }
+
+    public List<Audit> findAll() {
+        return auditRepository.findAll();
     }
 
     public Audit save(Audit audit, Class<?> clazz) throws DuplicateFieldException {
         saveOnLogs(audit, clazz);
+        notificationManager.notificationError(audit);
         return save(audit);
     }
 
-    @Override
-    public Audit save(Audit audit) throws DuplicateFieldException {
-        notificationManager.notificationError(audit);
-        return super.save(audit);
+    public Audit save(Audit audit) {
+        return auditRepository.save(audit);
+    }
+
+    public void saveAll(List<Audit> objects) {
+        objects.forEach(this::save);
     }
 
     private void saveOnLogs(Audit audit, Class<?> clazz) {

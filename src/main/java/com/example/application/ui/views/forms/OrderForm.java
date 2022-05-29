@@ -21,7 +21,6 @@ public class OrderForm extends AbstractForm<Order> {
   private final Supplier<List<Customer>> customerSupplier;
   private final Span timeOrderedSpan = new Span();
   private final Span idSpan = new Span();
-  public static final String euroSymbol = "€";
   private ProductOrderMaker productOrderMaker;
 
 

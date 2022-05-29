@@ -1,12 +1,11 @@
 package com.example.application.ui.views;
 
-import com.example.application.backend.data.OrderStatus;
-import com.example.application.backend.data.entity.Category;
 import com.example.application.backend.data.entity.Order;
 import com.example.application.backend.data.entity.OrderProduct;
 import com.example.application.backend.service.CustomerService;
 import com.example.application.backend.service.OrderService;
 import com.example.application.backend.service.ProductService;
+import com.example.application.backend.util.StringUtil;
 import com.example.application.ui.MainLayout;
 import com.example.application.ui.crud.AbstractCrudView;
 import com.example.application.ui.views.forms.OrderForm;
@@ -32,7 +31,7 @@ public class OrderView extends AbstractCrudView<Order> {
         grid.addClassNames("product-grid");
         grid.setSizeFull();
         grid.setColumns("id", "timeOrdered", "status");
-        grid.addColumn(Order::getPrice).setHeader("price").setSortOrderProvider(price -> Stream.of(new QuerySortOrder("price", price)));;
+        grid.addColumn(order -> StringUtil.formatPrice(order.getPrice())).setHeader("price").setSortOrderProvider(price -> Stream.of(new QuerySortOrder("price", price)));;
         grid.addColumn(order -> order.getCustomer().getName()).setHeader("customer").setSortOrderProvider(customer -> Stream.of(new QuerySortOrder("name", customer)));
         super.configureGrid(grid);
     }

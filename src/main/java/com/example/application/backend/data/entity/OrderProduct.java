@@ -77,4 +77,12 @@ public class OrderProduct extends AbstractEntity {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "OrderProduct{" +
+                "product=" + product.getName() +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                '}';
+    }
 }

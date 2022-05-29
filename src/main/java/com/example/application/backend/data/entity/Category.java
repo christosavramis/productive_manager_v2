@@ -24,4 +24,10 @@ public class Category extends AbstractEntity {
         product.setCategory(this);
     }
 
+    @Override
+    public String toString() {
+        return "Category{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }

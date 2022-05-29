@@ -59,4 +59,18 @@ public class Product extends AbstractEntity {
                 .build();
     }
 
+    @Override
+    public String toString() {
+        return "Product{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", cost=" + cost +
+                ", quantity=" + quantity +
+                ", status=" + status +
+                ", category=" + category +
+                ", tax=" + tax +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", barcode='" + barcode + '\'' +
+                '}';
+    }
 }

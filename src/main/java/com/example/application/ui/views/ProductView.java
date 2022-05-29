@@ -5,6 +5,7 @@ import com.example.application.backend.service.CategoryService;
 import com.example.application.backend.service.ImageService;
 import com.example.application.backend.service.ProductService;
 import com.example.application.backend.service.TaxService;
+import com.example.application.backend.util.StringUtil;
 import com.example.application.ui.MainLayout;
 import com.example.application.ui.crud.AbstractCrudView;
 import com.example.application.ui.views.forms.ProductForm;
@@ -34,11 +35,13 @@ public class ProductView extends AbstractCrudView<Product> {
         grid.addComponentColumn(product -> {
             String url = product.getImageUrl();
             Image image = new Image(url != null? url : "" , product.getName() + " image is missing");
-            image.setWidth(90, Unit.PIXELS);
+//            image.setWidth(90, Unit.PIXELS);
             image.setHeight(150, Unit.PIXELS);
             return image;
         }).setHeader("Image");
-        grid.addColumns("barcode", "name", "cost", "price", "quantity");
+        grid.addColumns("barcode", "name", "quantity");
+        grid.addColumn(product -> StringUtil.formatPrice(product.getCost())).setHeader("cost");
+        grid.addColumn(product -> StringUtil.formatPrice(product.getPrice())).setHeader("price");
         grid.addColumn(category -> category.getCategory() != null ? category.getCategory().getName() : "")
                 .setHeader("Category")
                 .setSortOrderProvider(category -> Stream.of(new QuerySortOrder("name", category)));

@@ -2,6 +2,7 @@ package com.example.application.ui.views.forms;
 
 import com.example.application.backend.data.entity.OrderProduct;
 import com.example.application.backend.data.entity.Product;
+import com.example.application.backend.util.StringUtil;
 import com.vaadin.flow.component.HasText;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.button.Button;
@@ -52,14 +53,14 @@ class ProductOrderMaker extends VerticalLayout {
     }
 
     private void setupOrderProductGrid() {
-        orderProductGrid.addColumn(orderProduct -> orderProduct.getProduct().getName()).setHeader("Product");
+        orderProductGrid.addColumn(orderProduct -> orderProduct.getProduct().getName()).setHeader("Product").setWidth("140px");
         orderProductGrid.addComponentColumn(orderProduct -> {
             String url = orderProduct.getProduct().getImageUrl();
             Image image = new Image(url != null? url : "" , orderProduct.getProduct().getName() + " image is missing");
             image.setWidth(50, Unit.PIXELS);
             image.setHeight(50, Unit.PIXELS);
             return image;
-        }).setHeader("Image");
+        }).setHeader("Image").setWidth("60px");
         orderProductGrid.addComponentColumn(orderProduct -> {
             Span quantity = new Span(orderProduct.getQuantity()+"");
             Div addButton = new Div();
@@ -77,8 +78,7 @@ class ProductOrderMaker extends VerticalLayout {
             addMinusLayout.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
             return addMinusLayout;
         }).setHeader("Quantity");
-        orderProductGrid.addColumn(orderProduct -> orderProduct.getPriceWithoutTax() + OrderForm.euroSymbol).setHeader("Price");
-
+        orderProductGrid.addColumn(orderProduct -> StringUtil.formatPrice(orderProduct.getPriceWithoutTax())).setHeader("Price");
     }
 
     protected void addProductToOrder(Product product) {
@@ -126,9 +126,9 @@ class ProductOrderMaker extends VerticalLayout {
 
     private void UpdateOrderProductGrid() {
         orderProductGrid.setItems(orderProducts);
-        productTotal.setText("Product total: " + orderProducts.stream().mapToDouble(OrderProduct::getPriceWithoutTax).sum() + OrderForm.euroSymbol);
-        taxTotal.setText("Tax total: " + orderProducts.stream().mapToDouble(OrderProduct::getOnlyTaxPrice).sum() + OrderForm.euroSymbol);
-        orderTotal.setText("Order total: " + orderProducts.stream().mapToDouble(OrderProduct::getPriceWithTax).sum() + OrderForm.euroSymbol);
+        productTotal.setText("Product total: " + StringUtil.formatPrice(orderProducts.stream().mapToDouble(OrderProduct::getPriceWithoutTax).sum()));
+        taxTotal.setText("Tax total: " + StringUtil.formatPrice(orderProducts.stream().mapToDouble(OrderProduct::getOnlyTaxPrice).sum()));
+        orderTotal.setText("Order total: " +  StringUtil.formatPrice(orderProducts.stream().mapToDouble(OrderProduct::getPriceWithTax).sum()));
 
     }
 }

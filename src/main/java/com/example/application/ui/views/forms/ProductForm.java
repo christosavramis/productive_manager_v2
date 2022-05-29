@@ -1,6 +1,7 @@
 package com.example.application.ui.views.forms;
 
-import com.example.application.backend.data.StringUtil;
+import com.example.application.backend.data.ProductStatus;
+import com.example.application.backend.util.StringUtil;
 import com.example.application.backend.data.entity.Category;
 import com.example.application.backend.data.entity.Product;
 import com.example.application.backend.data.entity.Tax;
@@ -12,12 +13,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.upload.Upload;
 import com.vaadin.flow.component.upload.receivers.MultiFileMemoryBuffer;
 import com.vaadin.flow.data.converter.StringToIntegerConverter;
-import org.springframework.util.StringUtils;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -32,6 +28,7 @@ public class ProductForm extends AbstractForm<Product> {
   ComboBox<Tax> tax = new ComboBox<>("tax");
   private Upload upload;
   private ImageService imageService;
+  private final ComboBox<ProductStatus> status = new ComboBox("status");
 
   public void setCategories(List<Category> categories) {
     category.setItems(categories);
@@ -59,8 +56,8 @@ public class ProductForm extends AbstractForm<Product> {
     tax.setItemLabelGenerator(Tax::getName);
 
     initUploaderImage();
-
-    add(name, barcode, imageUrl, upload, category, tax, cost, price, quantity);
+    status.setItems(List.of(ProductStatus.values()));
+    add(name, barcode, imageUrl, upload, category, tax, cost, price, quantity, status);
     addButtons();
   }
 

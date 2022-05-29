@@ -13,4 +13,11 @@ public class Tax extends AbstractEntity {
 
     private double value;
 
+    @Override
+    public String toString() {
+        return "Tax{" +
+                "name='" + name + '\'' +
+                ", value=" + value +
+                '}';
+    }
 }

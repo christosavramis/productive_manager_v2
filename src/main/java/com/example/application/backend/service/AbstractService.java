@@ -1,15 +1,20 @@
 package com.example.application.backend.service;
 
+import com.example.application.backend.data.AuditType;
+import com.example.application.backend.data.entity.Audit;
 import com.example.application.backend.exceptions.DuplicateFieldException;
 import com.example.application.backend.exceptions.ReferentialIntegrityException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public abstract class AbstractService<T>{
     private final JpaRepository<T, ?> jpaRepository;
+    private @Autowired AuditService auditService;
 
     public AbstractService(JpaRepository<T, ?> jpaRepository) {
         this.jpaRepository = jpaRepository;
@@ -20,6 +25,7 @@ public abstract class AbstractService<T>{
         T objectToBesaved = null;
         try {
             objectToBesaved = jpaRepository.save(object);
+            auditService.save(new Audit("Admin", LocalDate.now(), "Saved " + object.toString() +" successfully", AuditType.INFO));
         } catch (DataIntegrityViolationException exception) {
             throw new DuplicateFieldException("Item already exist");
         }
@@ -36,5 +42,9 @@ public abstract class AbstractService<T>{
         } catch (DataIntegrityViolationException exception) {
             throw new ReferentialIntegrityException("Please delete all references before deleting this");
         }
+    }
+
+    public void saveAll(List<T> objects) {
+        objects.forEach(this::save);
     }
 }
