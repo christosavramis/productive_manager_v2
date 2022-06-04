@@ -2,6 +2,7 @@ package com.example.application.ui.views.forms;
 
 import com.example.application.backend.data.OrderStatus;
 import com.example.application.backend.data.entity.*;
+import com.example.application.backend.util.StringUtil;
 import com.example.application.ui.crud.AbstractForm;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -48,7 +49,7 @@ public class OrderForm extends AbstractForm<Order> {
 
   private void updateIdAndSpan(){
       if (getFormObject() != null) {
-          timeOrderedSpan.setText("Timeordered: " + getFormObject().getTimeOrdered());
+          timeOrderedSpan.setText("Timeordered: " + StringUtil.formatDate(getFormObject().getTimeOrdered()));
           idSpan.setText("Id: " + getFormObject().getId());
       }
   }

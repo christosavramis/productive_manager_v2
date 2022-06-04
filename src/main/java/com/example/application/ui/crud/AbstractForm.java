@@ -20,7 +20,7 @@ import lombok.Setter;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,7 +70,7 @@ public abstract class AbstractForm<S> extends FormLayout {
             binder.writeBean(formObject);
             fireEvent(new SaveEvent(this, formObject));
         } catch (ValidationException e) {
-            auditService.save(new Audit("Guest", LocalDate.now(), e.getMessage(), AuditType.ERROR), this.getClass());
+            auditService.save(new Audit("Guest", LocalDateTime.now(), e.getMessage(), AuditType.ERROR), this.getClass());
         }
     }
 

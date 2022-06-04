@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Service
 public class ImageService {
@@ -25,9 +25,9 @@ public class ImageService {
             File outputFile = new File(IMAGE_FOLDER_PATH_SAVE + saveName);
             BufferedImage inputImage = ImageIO.read(buffer.getInputStream(name));
             ImageIO.write(inputImage, "png", outputFile);
-            auditService.save(new Audit("Guest", LocalDate.now(),"created new image " + name, AuditType.INFO), this.getClass());
+            auditService.save(new Audit("Guest", LocalDateTime.now(),"created new image " + name, AuditType.INFO), this.getClass());
         } catch (IOException e) {
-            auditService.save(new Audit("Guest", LocalDate.now(), e.getMessage(), AuditType.ERROR), this.getClass());
+            auditService.save(new Audit("Guest", LocalDateTime.now(), e.getMessage(), AuditType.ERROR), this.getClass());
         }
         return location;
     }

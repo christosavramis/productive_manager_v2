@@ -5,7 +5,7 @@ import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Lob;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Setter @Getter @Builder @AllArgsConstructor @NoArgsConstructor
 @Entity
@@ -13,7 +13,7 @@ public class Audit extends AbstractEntity {
 
     private String creator;
 
-    private LocalDate timeCreated;
+    private LocalDateTime timeCreated;
 
     @Lob
     private String message;

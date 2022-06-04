@@ -13,7 +13,6 @@ public class OrderService extends AbstractService<Order> {
 
     public Order save(Order order){
         order.calcPrice();
-        order.close();
         return super.save(order);
     }
 }

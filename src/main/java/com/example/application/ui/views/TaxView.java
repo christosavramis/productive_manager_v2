@@ -23,7 +23,10 @@ public class TaxView extends AbstractCrudView<Tax> {
         Grid<Tax> grid = new Grid<>(Tax.class);
         grid.addClassNames("product-grid");
         grid.setSizeFull();
-        grid.setColumns("id", "name", "value");
+        grid.setColumns();
+        grid.addColumn(Tax::getId).setHeader("Id");
+        grid.addColumn(Tax::getName).setHeader("Name");
+        grid.addColumn(Tax::getValue).setHeader("Value");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
         super.configureGrid(grid);
     }

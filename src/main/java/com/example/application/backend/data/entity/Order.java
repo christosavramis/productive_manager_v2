@@ -4,10 +4,9 @@ import com.example.application.backend.data.OrderStatus;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Setter @Getter @Builder @AllArgsConstructor @NoArgsConstructor
 @Entity @Table(name = "order_info")
@@ -17,7 +16,7 @@ public class Order extends AbstractEntity {
     @JoinColumn
     private Customer customer;
 
-    private LocalDate timeOrdered;
+    private LocalDateTime timeOrdered;
 
     private OrderStatus status;
 
@@ -36,7 +35,7 @@ public class Order extends AbstractEntity {
 
     public void close(){
         if (timeOrdered == null){
-            timeOrdered = LocalDate.now();
+            timeOrdered = LocalDateTime.now();
         }
     }
 

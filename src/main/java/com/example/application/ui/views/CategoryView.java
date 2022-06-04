@@ -23,7 +23,9 @@ public class CategoryView extends AbstractCrudView<Category> {
         Grid<Category> grid = new Grid<>(Category.class);
         grid.addClassNames("product-grid");
         grid.setSizeFull();
-        grid.setColumns("id", "name");
+        grid.setColumns();
+        grid.addColumn(Category::getId).setHeader("Id");
+        grid.addColumn(Category::getName).setHeader("Name");
         super.configureGrid(grid);
     }
 }

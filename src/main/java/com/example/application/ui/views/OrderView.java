@@ -30,9 +30,12 @@ public class OrderView extends AbstractCrudView<Order> {
         Grid<Order> grid = new Grid<>(Order.class);
         grid.addClassNames("product-grid");
         grid.setSizeFull();
-        grid.setColumns("id", "timeOrdered", "status");
-        grid.addColumn(order -> StringUtil.formatPrice(order.getPrice())).setHeader("price").setSortOrderProvider(price -> Stream.of(new QuerySortOrder("price", price)));;
-        grid.addColumn(order -> order.getCustomer().getName()).setHeader("customer").setSortOrderProvider(customer -> Stream.of(new QuerySortOrder("name", customer)));
+        grid.setColumns();
+        grid.addColumn(Order::getId).setHeader("Id");
+        grid.addColumn(order -> StringUtil.formatDate(order.getTimeOrdered())).setHeader("TimeOrdered");
+        grid.addColumn(Order::getStatus).setHeader("Status");
+        grid.addColumn(order -> StringUtil.formatPrice(order.getPrice())).setHeader("Price").setSortOrderProvider(price -> Stream.of(new QuerySortOrder("price", price)));;
+        grid.addColumn(order -> order.getCustomer().getName()).setHeader("Customer").setSortOrderProvider(customer -> Stream.of(new QuerySortOrder("name", customer)));
         super.configureGrid(grid);
     }
 

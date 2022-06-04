@@ -76,7 +76,7 @@ public class MainLayout extends AppLayout {
         logoName.setAlignItems(FlexComponent.Alignment.CENTER);
 
         return new AccordionPanel(temporaryCSSForLinks(logoName), createContent(
-                createDrawer("Products", VaadinIcon.INBOX, ProductView.class),
+                createDrawer("Products", VaadinIcon.PACKAGE, ProductView.class),
                 createDrawer("Categories", VaadinIcon.CALC_BOOK, CategoryView.class),
                 createDrawer("Taxes", VaadinIcon.ABACUS, TaxView.class))
         );
@@ -91,7 +91,8 @@ public class MainLayout extends AppLayout {
         logoName.setAlignItems(FlexComponent.Alignment.CENTER);
 
         return new AccordionPanel(temporaryCSSForLinks(logoName), createContent(
-                createDrawer("Orders", VaadinIcon.CART, OrderView.class)
+                createDrawer("Orders", VaadinIcon.CART, OrderView.class),
+                createDrawer("Customers", VaadinIcon.CUBE, CustomerView.class)
         ));
     }
 
@@ -104,7 +105,8 @@ public class MainLayout extends AppLayout {
         logoName.setAlignItems(FlexComponent.Alignment.CENTER);
 
         return new AccordionPanel(temporaryCSSForLinks(logoName), createContent(
-                createDrawer("Audits", VaadinIcon.RECORDS, AuditView.class)
+                createDrawer("Audits", VaadinIcon.RECORDS, AuditView.class),
+                createDrawer("Statistics", VaadinIcon.CHART, ReportProductView.class)
         ));
     }
 

@@ -9,7 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public abstract class AbstractService<T>{
@@ -25,7 +25,7 @@ public abstract class AbstractService<T>{
         T objectToBesaved = null;
         try {
             objectToBesaved = jpaRepository.save(object);
-            auditService.save(new Audit("Admin", LocalDate.now(), "Saved " + object.toString() +" successfully", AuditType.INFO));
+            auditService.save(new Audit("Admin", LocalDateTime.now(), "Saved " + object.toString() +" successfully", AuditType.INFO));
         } catch (DataIntegrityViolationException exception) {
             throw new DuplicateFieldException("Item already exist");
         }

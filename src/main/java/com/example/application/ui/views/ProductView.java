@@ -18,7 +18,7 @@ import com.vaadin.flow.router.Route;
 
 import java.util.stream.Stream;
 
-@Route(value = "inventory/products", layout = MainLayout.class)
+@Route(value = "", layout = MainLayout.class)
 @PageTitle("Products | Productive Manager")
 public class ProductView extends AbstractCrudView<Product> {
 
@@ -31,7 +31,8 @@ public class ProductView extends AbstractCrudView<Product> {
         Grid<Product> grid = new Grid<>(Product.class);
         grid.addClassNames("product-grid");
         grid.setSizeFull();
-        grid.setColumns("id");
+        grid.setColumns();
+        grid.addColumn(Product::getId).setHeader("Id");
         grid.addComponentColumn(product -> {
             String url = product.getImageUrl();
             Image image = new Image(url != null? url : "" , product.getName() + " image is missing");
@@ -39,9 +40,11 @@ public class ProductView extends AbstractCrudView<Product> {
             image.setHeight(150, Unit.PIXELS);
             return image;
         }).setHeader("Image");
-        grid.addColumns("barcode", "name", "quantity");
-        grid.addColumn(product -> StringUtil.formatPrice(product.getCost())).setHeader("cost");
-        grid.addColumn(product -> StringUtil.formatPrice(product.getPrice())).setHeader("price");
+        grid.addColumn(Product::getBarcode).setHeader("Barcode");
+        grid.addColumn(Product::getName).setHeader("Name");
+        grid.addColumn(Product::getQuantity).setHeader("Quantity");
+        grid.addColumn(product -> StringUtil.formatPrice(product.getCost())).setHeader("Cost");
+        grid.addColumn(product -> StringUtil.formatPrice(product.getPrice())).setHeader("Price");
         grid.addColumn(category -> category.getCategory() != null ? category.getCategory().getName() : "")
                 .setHeader("Category")
                 .setSortOrderProvider(category -> Stream.of(new QuerySortOrder("name", category)));
