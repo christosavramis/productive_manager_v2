@@ -38,7 +38,8 @@ public class DataGenerator {
 
             List<Category> categories = List.of(
                     Category.builder().name("Energy Drinks").build(),
-                    Category.builder().name("Soft Drinks").build()
+                    Category.builder().name("Soft Drinks").build(),
+                    Category.builder().name("Chips").build()
             );
             categoryService.saveAll(categories);
 
@@ -78,6 +79,21 @@ public class DataGenerator {
                     Product.builder().name("Fanta Lemon 1,5L").category(categories.get(1)).price(1.47).cost(0.80)
                             .tax(taxes.get(0)).status(ProductStatus.IN_STOCK).quantity(10)
                             .imageUrl(IMAGE_FOLDER_PATH_DISPLAY + "FantaLemon" + ".png")
+                            .barcode(RandomStringUtils.randomNumeric(14))
+                            .build(),
+                    Product.builder().name("Ruffles ketchup").category(categories.get(2)).price(1.40).cost(0.70)
+                            .tax(taxes.get(0)).status(ProductStatus.IN_STOCK).quantity(22)
+                            .imageUrl(IMAGE_FOLDER_PATH_DISPLAY + "ruffles_ketchap" + ".png")
+                            .barcode(RandomStringUtils.randomNumeric(14))
+                            .build(),
+                    Product.builder().name("Ruffles Barbeque").category(categories.get(2)).price(1.70).cost(0.88)
+                            .tax(taxes.get(0)).status(ProductStatus.IN_STOCK).quantity(51)
+                            .imageUrl(IMAGE_FOLDER_PATH_DISPLAY + "ruffles_barbeque" + ".png")
+                            .barcode(RandomStringUtils.randomNumeric(14))
+                            .build(),
+                    Product.builder().name("Ruffles Salt").category(categories.get(2)).price(1.60).cost(0.90)
+                            .tax(taxes.get(0)).status(ProductStatus.IN_STOCK).quantity(30)
+                            .imageUrl(IMAGE_FOLDER_PATH_DISPLAY + "ruffles_salt" + ".png")
                             .barcode(RandomStringUtils.randomNumeric(14))
                             .build()
             );
