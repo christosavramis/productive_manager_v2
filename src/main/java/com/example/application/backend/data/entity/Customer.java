@@ -16,10 +16,8 @@ public class Customer extends AbstractEntity {
 
     private String name;
 
-    @Email
     private String email;
 
-    @Pattern(regexp = "^(\\+\\d+)?([ -]?\\d+){4,14}$", message = "Phone not valid")
     private String phone;
 
     @OneToMany(targetEntity = Order.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)

@@ -16,8 +16,11 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
+import javax.annotation.security.PermitAll;
+
 @Route(value = "reports/product", layout = MainLayout.class)
 @PageTitle("Statistics | Productive Manager")
+@PermitAll
 public class ReportProductView extends VerticalLayout {
 
     public ReportProductView(ReportService reportService) {

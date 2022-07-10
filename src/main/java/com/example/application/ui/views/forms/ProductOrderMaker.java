@@ -8,6 +8,8 @@ import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.*;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -15,6 +17,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 class ProductOrderMaker extends VerticalLayout {
     private final Grid<OrderProduct> orderProductGrid = new Grid<>();
@@ -23,9 +26,15 @@ class ProductOrderMaker extends VerticalLayout {
     private Div productTotal = new Div();
     private Div taxTotal = new Div();
     private Div orderTotal = new Div();
+    private Supplier<List<Product>> productSupplier;
+    private Button addToOrderButton;
+    private Button productAddToOrderButton = new Button("+");
+    private Div addButton = new Div();
+    private Div minusButton = new Div();
 
-    ProductOrderMaker(List<Product> availableProducts) {
-        setupProductGrid(availableProducts);
+    ProductOrderMaker(Supplier<List<Product>> productSupplier ) {
+        this.productSupplier = productSupplier;
+        setupProductGrid();
         setupOrderProductGrid();
 
         VerticalLayout orderingLayout = new VerticalLayout();
@@ -35,7 +44,7 @@ class ProductOrderMaker extends VerticalLayout {
 //        getStyle().set("background-color", "red");
     }
 
-    private void setupProductGrid(List<Product> availableProducts) {
+    private void setupProductGrid() {
         productGrid.addColumn(Product::getName).setHeader("Product Name");
         productGrid.addComponentColumn(product -> {
             String url = product.getImageUrl();
@@ -45,11 +54,10 @@ class ProductOrderMaker extends VerticalLayout {
             return image;
         }).setHeader("Image");
         productGrid.addComponentColumn(product -> {
-            Button addToOrderButton = new Button("+");
-            addToOrderButton.addClickListener(buttonClickEvent -> addProductToOrder(product));
-            return addToOrderButton;
+            productAddToOrderButton.addClickListener(buttonClickEvent -> addProductToOrder(product));
+            return productAddToOrderButton;
         });
-        productGrid.setItems(availableProducts);
+        updateProductGrid();
     }
 
     private void setupOrderProductGrid() {
@@ -63,12 +71,10 @@ class ProductOrderMaker extends VerticalLayout {
         }).setHeader("Image").setWidth("60px");
         orderProductGrid.addComponentColumn(orderProduct -> {
             Span quantity = new Span(orderProduct.getQuantity()+"");
-            Div addButton = new Div();
             addButton.setText("+");
             addButton.setWidth(20, Unit.PIXELS);
             addButton.setHeight(20, Unit.PIXELS);
             addButton.addClickListener(buttonClickEvent -> increaseOrderProductQuantity(orderProduct, quantity));
-            Div minusButton = new Div();
             minusButton.setText("-");
             minusButton.setWidth(20, Unit.PIXELS);
             minusButton.setHeight(20, Unit.PIXELS);
@@ -111,8 +117,17 @@ class ProductOrderMaker extends VerticalLayout {
         productSearch.setClearButtonVisible(true);
         productSearch.setValueChangeMode(ValueChangeMode.LAZY);
 
-        Button addToOrderButton = new Button("Add to Order");
-        addToOrderButton.addClickListener(click -> {});
+        addToOrderButton = new Button("Add to Order");
+        addToOrderButton.addClickListener(click -> {
+            Product product = productSupplier.get().stream()
+                    .filter(productStored -> productStored.getBarcode() != null
+                            && productStored.getBarcode().equals(productSearch.getValue()))
+                    .findAny().orElse(null);
+            if (product != null)
+                addProductToOrder(product);
+            else
+                Notification.show("product not found").addThemeVariants(NotificationVariant.LUMO_ERROR);
+        });
 
         HorizontalLayout toolbar = new HorizontalLayout(productSearch, addToOrderButton);
         toolbar.addClassName("toolbar");
@@ -122,6 +137,14 @@ class ProductOrderMaker extends VerticalLayout {
     public void syncWithOrder(List<OrderProduct> orderProducts) {
         this.orderProducts = orderProducts;
         UpdateOrderProductGrid();
+        updateProductGrid();
+    }
+
+    public void disableCartButtons(boolean shouldDisable) {
+        addToOrderButton.setEnabled(!shouldDisable);
+        addButton.setEnabled(!shouldDisable);
+        minusButton.setEnabled(!shouldDisable);
+        productAddToOrderButton.setEnabled(!shouldDisable);
     }
 
     private void UpdateOrderProductGrid() {
@@ -130,5 +153,9 @@ class ProductOrderMaker extends VerticalLayout {
         taxTotal.setText("Tax total: " + StringUtil.formatPrice(orderProducts.stream().mapToDouble(OrderProduct::getOnlyTaxPrice).sum()));
         orderTotal.setText("Order total: " +  StringUtil.formatPrice(orderProducts.stream().mapToDouble(OrderProduct::getPriceWithTax).sum()));
 
+    }
+
+    private void updateProductGrid() {
+        productGrid.setItems(productSupplier.get());
     }
 }

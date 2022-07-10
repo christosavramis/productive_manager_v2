@@ -11,8 +11,11 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
+import javax.annotation.security.PermitAll;
+
 @Route(value = "inventory/taxes", layout = MainLayout.class)
 @PageTitle("Taxes | Productive Manager")
+@PermitAll
 public class TaxView extends AbstractCrudView<Tax> {
     public TaxView(TaxService taxService) {
         super("Tax", new TaxForm(), taxService, Tax::new);

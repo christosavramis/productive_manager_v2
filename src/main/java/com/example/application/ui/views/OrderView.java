@@ -14,11 +14,14 @@ import com.vaadin.flow.data.provider.QuerySortOrder;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import java.util.stream.Stream;
 
 
 @Route(value = "inventory/orders", layout = MainLayout.class)
 @PageTitle("Orders | Productive Manager")
+@PermitAll
 public class OrderView extends AbstractCrudView<Order> {
 
     public OrderView(OrderService orderService, ProductService productService, CustomerService customerService) {

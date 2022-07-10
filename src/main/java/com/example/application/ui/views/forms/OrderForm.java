@@ -42,7 +42,7 @@ public class OrderForm extends AbstractForm<Order> {
     VerticalLayout detailsWrapper = new VerticalLayout(new H2("Order details"), details);
     detailsWrapper.setSizeFull();
 
-    productOrderMaker = new ProductOrderMaker(productSupplier.get());
+    productOrderMaker = new ProductOrderMaker(productSupplier);
     add(detailsWrapper, productOrderMaker);
     addButtons();
   }
@@ -59,8 +59,10 @@ public class OrderForm extends AbstractForm<Order> {
     super.setFormObjectSync(formObject);
     if (formObject != null) {
         updateIdAndSpan();
+        boolean isClosed =  formObject.getStatus().equals(OrderStatus.CLOSED);
+        productOrderMaker.disableCartButtons(isClosed);
     }
-      productOrderMaker.syncWithOrder(formObject != null ? formObject.getProducts() : new ArrayList<>());
+    productOrderMaker.syncWithOrder(formObject != null ? formObject.getProducts() : new ArrayList<>());
   }
 
 }

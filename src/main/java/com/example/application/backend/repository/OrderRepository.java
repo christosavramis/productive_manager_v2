@@ -1,5 +1,6 @@
 package com.example.application.backend.repository;
 
+import com.example.application.backend.data.entity.Customer;
 import com.example.application.backend.data.entity.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

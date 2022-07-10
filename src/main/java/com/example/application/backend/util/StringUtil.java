@@ -37,6 +37,8 @@ public class StringUtil {
 
 
     public static String formatDate(LocalDateTime localDate) {
+        if (localDate == null)
+            return "";
         return dateTimeFormatter.format(localDate);
     }
 

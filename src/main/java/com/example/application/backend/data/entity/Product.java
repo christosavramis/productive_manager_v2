@@ -13,18 +13,18 @@ import javax.validation.constraints.*;
 @Entity
 public class Product extends AbstractEntity {
 
-    @NotBlank(message = "Product name is required")
+//    @NotBlank(message = "Product name is required")
     @Size(max = 255)
     @Column(unique = true)
     private String name;
 
-    @Min(value = 0, message = "Minimum price is 0")
+//    @Min(value = 0, message = "Minimum price is 0")
     private double price;
 
-    @Min(value = 0, message = "Minimum price is 0")
+//    @Min(value = 0, message = "Minimum price is 0")
     private double cost;
 
-    @Min(value = 0, message = "Minimum quantity is 0")
+//    @Min(value = 0, message = "Minimum quantity is 0")
     private int quantity;
 
     @Enumerated(EnumType.STRING)
@@ -35,18 +35,23 @@ public class Product extends AbstractEntity {
     @JoinColumn
     private Category category;
 
-    @OneToOne(targetEntity = Tax.class, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE, optional = false)
+    @JoinColumn
+    private ProductSupplier supplier;
+
+    @ManyToOne(cascade = CascadeType.MERGE, optional = false)
     private Tax tax;
 
     @Lob
     @Basic(fetch = FetchType.LAZY)
     private String imageUrl;
 
+    private boolean markedForDelete = false;
 
     private String barcode;
 
     public Product copy() {
-        return Product.builder()
+        Product product = Product.builder()
                 .name(name)
                 .price(price)
                 .cost(cost)
@@ -56,7 +61,11 @@ public class Product extends AbstractEntity {
                 .tax(tax)
                 .imageUrl(imageUrl)
                 .barcode(barcode)
+                .markedForDelete(markedForDelete)
                 .build();
+        product.setId(getId());
+        product.setVersion(getVersion());
+        return product;
     }
 
     @Override

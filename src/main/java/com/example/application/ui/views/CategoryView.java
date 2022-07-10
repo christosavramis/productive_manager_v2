@@ -9,9 +9,12 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
+import javax.annotation.security.PermitAll;
+
 
 @Route(value = "inventory/categories", layout = MainLayout.class)
 @PageTitle("Categories | Productive Manager")
+@PermitAll
 public class CategoryView extends AbstractCrudView<Category> {
 
     public CategoryView(CategoryService categoryService) {

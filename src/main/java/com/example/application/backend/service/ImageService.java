@@ -25,9 +25,9 @@ public class ImageService {
             File outputFile = new File(IMAGE_FOLDER_PATH_SAVE + saveName);
             BufferedImage inputImage = ImageIO.read(buffer.getInputStream(name));
             ImageIO.write(inputImage, "png", outputFile);
-            auditService.save(new Audit("Guest", LocalDateTime.now(),"created new image " + name, AuditType.INFO), this.getClass());
+            auditService.save(new Audit(LocalDateTime.now(),"created new image " + name, AuditType.INFO), this.getClass());
         } catch (IOException e) {
-            auditService.save(new Audit("Guest", LocalDateTime.now(), e.getMessage(), AuditType.ERROR), this.getClass());
+            auditService.save(new Audit(LocalDateTime.now(), e.getMessage(), AuditType.ERROR), this.getClass());
         }
         return location;
     }

@@ -52,6 +52,11 @@ public abstract class AbstractForm<S> extends FormLayout {
     public void addButtons(VerticalLayout verticalLayout){
         verticalLayout.add(createButtonsLayout());
     }
+    public void setButtonVisibility(boolean shouldDisplay) {
+        save.setEnabled(shouldDisplay);
+        close.setEnabled(shouldDisplay);
+    }
+
 
     public Button getSaveButton() {
         return save;
@@ -70,7 +75,7 @@ public abstract class AbstractForm<S> extends FormLayout {
             binder.writeBean(formObject);
             fireEvent(new SaveEvent(this, formObject));
         } catch (ValidationException e) {
-            auditService.save(new Audit("Guest", LocalDateTime.now(), e.getMessage(), AuditType.ERROR), this.getClass());
+            auditService.save(new Audit(LocalDateTime.now(), e.getMessage(), AuditType.ERROR), this.getClass());
         }
     }
 

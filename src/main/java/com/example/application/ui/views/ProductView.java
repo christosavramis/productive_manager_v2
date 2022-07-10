@@ -1,10 +1,7 @@
 package com.example.application.ui.views;
 
 import com.example.application.backend.data.entity.Product;
-import com.example.application.backend.service.CategoryService;
-import com.example.application.backend.service.ImageService;
-import com.example.application.backend.service.ProductService;
-import com.example.application.backend.service.TaxService;
+import com.example.application.backend.service.*;
 import com.example.application.backend.util.StringUtil;
 import com.example.application.ui.MainLayout;
 import com.example.application.ui.crud.AbstractCrudView;
@@ -16,14 +13,16 @@ import com.vaadin.flow.data.provider.QuerySortOrder;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
+import javax.annotation.security.PermitAll;
 import java.util.stream.Stream;
 
 @Route(value = "", layout = MainLayout.class)
 @PageTitle("Products | Productive Manager")
+@PermitAll
 public class ProductView extends AbstractCrudView<Product> {
 
-    public ProductView(CategoryService categoryService, TaxService taxService, ProductService productService, ImageService imageService) {
-        super("Product", new ProductForm(categoryService::findAll, taxService::findAll, imageService), productService, Product::new);
+    public ProductView(CategoryService categoryService, TaxService taxService, ProductService productService, ImageService imageService, ProductSupplierService productSupplierService) {
+        super("Product", new ProductForm(categoryService::findAll, taxService::findAll, imageService, productSupplierService::findAll), productService, Product::new);
     }
 
     @Override
@@ -48,10 +47,12 @@ public class ProductView extends AbstractCrudView<Product> {
         grid.addColumn(category -> category.getCategory() != null ? category.getCategory().getName() : "")
                 .setHeader("Category")
                 .setSortOrderProvider(category -> Stream.of(new QuerySortOrder("name", category)));
-        grid.addColumn(category -> category.getTax() != null ? category.getTax().getName() : "")
+        grid.addColumn(product -> product.getTax() != null ? product.getTax().getName() : "")
                 .setHeader("Tax")
-                .setSortOrderProvider(category -> Stream.of(new QuerySortOrder("name", category)));
-
+                .setSortOrderProvider(product -> Stream.of(new QuerySortOrder("name", product)));
+        grid.addColumn(product -> product.getSupplier() != null ? product.getSupplier().getName() : "")
+                .setHeader("Supplier")
+                .setSortOrderProvider(product -> Stream.of(new QuerySortOrder("name", product)));
         super.configureGrid(grid);
     }
 }

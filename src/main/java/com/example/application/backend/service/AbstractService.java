@@ -25,7 +25,7 @@ public abstract class AbstractService<T>{
         T objectToBesaved = null;
         try {
             objectToBesaved = jpaRepository.save(object);
-            auditService.save(new Audit("Admin", LocalDateTime.now(), "Saved " + object.toString() +" successfully", AuditType.INFO));
+            auditService.save(new Audit(LocalDateTime.now(), "Saved " + object.toString() +" successfully", AuditType.INFO));
         } catch (DataIntegrityViolationException exception) {
             throw new DuplicateFieldException("Item already exist");
         }
@@ -46,5 +46,14 @@ public abstract class AbstractService<T>{
 
     public void saveAll(List<T> objects) {
         objects.forEach(this::save);
+    }
+
+    @Transactional
+    public T saveNoAudit(T object) throws DuplicateFieldException {
+        T objectToBesaved = null;
+        try {
+            objectToBesaved = jpaRepository.save(object);
+        } catch (DataIntegrityViolationException exception) {}
+        return objectToBesaved;
     }
 }

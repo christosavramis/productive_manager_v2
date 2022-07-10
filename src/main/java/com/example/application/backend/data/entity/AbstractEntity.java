@@ -6,10 +6,10 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
-import lombok.Getter;
+import lombok.*;
 
+@Setter @Getter
 @MappedSuperclass
-@Getter
 public abstract class AbstractEntity {
 
     @Id

@@ -1,6 +1,8 @@
 package com.example.application.ui.views.forms;
 
 import com.example.application.backend.data.ProductStatus;
+import com.example.application.backend.data.entity.ProductSupplier;
+import com.example.application.backend.service.ProductSupplierService;
 import com.example.application.backend.util.StringUtil;
 import com.example.application.backend.data.entity.Category;
 import com.example.application.backend.data.entity.Product;
@@ -26,6 +28,7 @@ public class ProductForm extends AbstractForm<Product> {
   TextField imageUrl = new TextField("image URL");
   ComboBox<Category> category = new ComboBox<>("category");
   ComboBox<Tax> tax = new ComboBox<>("tax");
+  ComboBox<ProductSupplier> supplier = new ComboBox<>("supplier");
   private Upload upload;
   private ImageService imageService;
   private final ComboBox<ProductStatus> status = new ComboBox("status");
@@ -34,7 +37,7 @@ public class ProductForm extends AbstractForm<Product> {
     category.setItems(categories);
   }
 
-  public ProductForm(Supplier<List<Category>> categories, Supplier<List<Tax>> taxes, ImageService imageService) {
+  public ProductForm(Supplier<List<Category>> categories, Supplier<List<Tax>> taxes, ImageService imageService, Supplier<List<ProductSupplier>> suppliers) {
     super(Product.class);
     this.imageService = imageService;
 
@@ -55,9 +58,14 @@ public class ProductForm extends AbstractForm<Product> {
     tax.setRequired(true);
     tax.setItemLabelGenerator(Tax::getName);
 
+    supplier.setItems(suppliers.get());
+    supplier.setErrorMessage("tax must be filled in!");
+    supplier.setRequired(false);
+    supplier.setItemLabelGenerator(ProductSupplier::getName);
+
     initUploaderImage();
     status.setItems(List.of(ProductStatus.values()));
-    add(name, barcode, imageUrl, upload, category, tax, cost, price, quantity, status);
+    add(name, barcode, imageUrl, upload, category, tax, supplier, cost, price, quantity, status);
     addButtons();
   }
 

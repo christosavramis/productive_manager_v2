@@ -19,4 +19,11 @@ public class Audit extends AbstractEntity {
     private String message;
 
     private AuditType auditType;
+
+
+    public Audit(LocalDateTime timeCreated, String message, AuditType auditType) {
+        this.timeCreated = timeCreated;
+        this.message = message;
+        this.auditType = auditType;
+    }
 }

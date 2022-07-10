@@ -1,8 +1,11 @@
 package com.example.application.backend.service;
 
 import com.example.application.backend.data.entity.Audit;
+import com.example.application.backend.data.entity.Employee;
 import com.example.application.backend.exceptions.DuplicateFieldException;
 import com.example.application.backend.repository.AuditRepository;
+import com.example.application.backend.util.StringUtil;
+import com.example.application.security.SecurityService;
 import com.example.application.ui.views.NotificationManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +17,7 @@ import java.util.List;
 @Service
 public class AuditService {
     private @Autowired NotificationManager notificationManager;
+    private @Autowired SecurityService securityService;
     private AuditRepository auditRepository;
     public AuditService(AuditRepository repository) {
         this.auditRepository = repository;
@@ -24,12 +28,20 @@ public class AuditService {
     }
 
     public Audit save(Audit audit, Class<?> clazz) throws DuplicateFieldException {
+        if (StringUtil.isEmptyOrNull(audit.getCreator())) {
+            Employee employee = securityService.getAuthenticatedUser();
+            audit.setCreator(employee != null ? employee.getName() : "Admin");
+        }
         saveOnLogs(audit, clazz);
         notificationManager.notificationError(audit);
         return save(audit);
     }
 
     public Audit save(Audit audit) {
+        if (StringUtil.isEmptyOrNull(audit.getCreator())) {
+            Employee employee = securityService.getAuthenticatedUser();
+            audit.setCreator(employee != null ? employee.getName() : "Admin");
+        }
         return auditRepository.save(audit);
     }
 
