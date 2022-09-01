@@ -77,7 +77,7 @@ public class DataGenerator {
                     //Energy Drinks
                     Product.builder().name("Hell 250ml").category(categories.get(0)).price(0.71).cost(0.50)
                             .tax(taxes.get(0)).status(ProductStatus.IN_STOCK).quantity(StringUtil.getRandomNumber(100, 300))
-                            .imageUrl(IMAGE_FOLDER_PATH_DISPLAY + "hell" + ".png")
+                            .imageUrl(IMAGE_FOLDER_PATH_DISPLAY + "Hell" + ".png")
                             .barcode(RandomStringUtils.randomNumeric(14))
                             .supplier((ProductSupplier) StringUtil.getRandomOfList(productSuppliers))
                             .build(),
@@ -143,7 +143,7 @@ public class DataGenerator {
                             .build(),
                     Product.builder().name("Johnnie Walker Scotch").category(categories.get(3)).price(43.20).cost(23.20)
                             .tax(taxes.get(0)).status(ProductStatus.IN_STOCK).quantity(StringUtil.getRandomNumber(100, 300))
-                            .imageUrl(IMAGE_FOLDER_PATH_DISPLAY + "JohnnieWalkerScotch" + ".png")
+                            .imageUrl(IMAGE_FOLDER_PATH_DISPLAY + "JohnnieWalker" + ".png")
                             .barcode(RandomStringUtils.randomNumeric(14))
                             .supplier((ProductSupplier) StringUtil.getRandomOfList(productSuppliers))
                             .build()
