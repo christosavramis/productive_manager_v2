@@ -20,6 +20,7 @@ public class PolicyView extends AbstractCrudView<Policy> {
 
     public PolicyView(PolicyService PolicyService) {
         super("Policy", new PolicyForm(), PolicyService, Policy::new);
+        disableAddNewItemButton();
     }
 
     @Override

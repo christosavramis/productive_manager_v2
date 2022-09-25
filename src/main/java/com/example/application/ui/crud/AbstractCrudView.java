@@ -45,6 +45,10 @@ public class AbstractCrudView<T> extends VerticalLayout {
         closeEditor();
     }
 
+    public void disableAddNewItemButton(){
+        addNewItemButton.setEnabled(false);
+    }
+
     private HorizontalLayout getToolbar() {
         addNewItemButton = new Button("Add "+toolbarName);
         addNewItemButton.addClickListener(click -> addItem());
