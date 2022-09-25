@@ -1,7 +1,7 @@
 /target/
 .idea/
 .vscode/
-.settings
+.policies
 .project
 .classpath
 

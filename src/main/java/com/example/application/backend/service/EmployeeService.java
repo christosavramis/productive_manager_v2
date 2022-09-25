@@ -1,5 +1,6 @@
 package com.example.application.backend.service;
 
+import com.example.application.backend.data.EmployeeRole;
 import com.example.application.backend.data.entity.Employee;
 import com.example.application.backend.repository.EmployeeRepository;
 import com.example.application.security.SecurityService;
@@ -8,7 +9,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,9 +39,19 @@ public class EmployeeService extends AbstractService<Employee> implements UserDe
 
     @Override
     public List<Employee> findAll() {
-        return super.findAll().stream()
-                .filter(employee -> !employee.equals(securityService.getAuthenticatedUser()))
-                .collect(Collectors.toList());
+        Employee employee = securityService.getAuthenticatedUser();
+        if (employee == null) {
+            return List.of();
+        }
+        List<Employee> employees = super.findAll();
+
+        if (EmployeeRole.USER.equals(employee.getRole())) {
+            employees = employees.stream()
+                    .filter(savedEmployee -> savedEmployee.equals(employee))
+                    .collect(Collectors.toList());
+        }
+
+        return employees;
     }
 
 }

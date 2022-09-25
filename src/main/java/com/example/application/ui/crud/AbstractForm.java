@@ -37,6 +37,13 @@ public abstract class AbstractForm<S> extends FormLayout {
         syncFields.add(syncField);
     }
     public @Autowired AuditService auditService;
+    private boolean disableDelete;
+
+    @SneakyThrows
+    public AbstractForm(Class<S> classUsed, boolean disableDelete) {
+        this(classUsed);
+        this.disableDelete = disableDelete;
+    }
 
     @SneakyThrows
     public AbstractForm(Class<S> classUsed) {
@@ -108,6 +115,9 @@ public abstract class AbstractForm<S> extends FormLayout {
         close.addClickListener(event -> close());
 
         binder.addStatusChangeListener(e -> save.setEnabled(binder.isValid()));
+        if (disableDelete) {
+            delete.setVisible(false);
+        }
         return new HorizontalLayout(save, delete, close);
     }
 

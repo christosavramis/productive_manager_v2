@@ -113,7 +113,8 @@ public class MainLayout extends AppLayout {
         return new AccordionPanel(temporaryCSSForLinks(logoName), createContent(
                 createDrawer("Audits", VaadinIcon.RECORDS, AuditView.class),
                 createDrawer("Statistics", VaadinIcon.CHART, ReportProductView.class),
-                createDrawer("Employees", VaadinIcon.USER, EmployeeView.class)
+                createDrawer("Employees", VaadinIcon.USER, EmployeeView.class),
+                createDrawer("Settings", VaadinIcon.OPTIONS, PolicyView.class)
         ));
     }
 
@@ -122,7 +123,9 @@ public class MainLayout extends AppLayout {
         accordion.getStyle().set("padding-left", "10px");
         accordion.add(AccordionPanelInventory());
         accordion.add(accordionPanelOrdering());
-        accordion.add(accordionPanelReports());
+        if (securityService.isAdmin()) {
+            accordion.add(accordionPanelReports());
+        }
         addToDrawer(accordion);
     }
 

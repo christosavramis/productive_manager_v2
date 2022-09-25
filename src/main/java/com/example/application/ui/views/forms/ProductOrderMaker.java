@@ -17,6 +17,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 class ProductOrderMaker extends VerticalLayout {
@@ -29,10 +30,14 @@ class ProductOrderMaker extends VerticalLayout {
     private Supplier<List<Product>> productSupplier;
     private Button addToOrderButton;
     private Button productAddToOrderButton = new Button("+");
-    private Div addButton = new Div();
-    private Div minusButton = new Div();
+    private boolean isDisabled = false;
+    private TextField productSearch = new TextField();
 
-    ProductOrderMaker(Supplier<List<Product>> productSupplier ) {
+    private Consumer<Integer> quantityChangeConsumer;
+
+
+    ProductOrderMaker(Supplier<List<Product>> productSupplier, Consumer<Integer> quantityChangeConsumer) {
+        this.quantityChangeConsumer = quantityChangeConsumer;
         this.productSupplier = productSupplier;
         setupProductGrid();
         setupOrderProductGrid();
@@ -54,6 +59,8 @@ class ProductOrderMaker extends VerticalLayout {
             return image;
         }).setHeader("Image");
         productGrid.addComponentColumn(product -> {
+            Button productAddToOrderButton = new Button("+");
+            productAddToOrderButton.setEnabled(!isDisabled);
             productAddToOrderButton.addClickListener(buttonClickEvent -> addProductToOrder(product));
             return productAddToOrderButton;
         });
@@ -71,11 +78,15 @@ class ProductOrderMaker extends VerticalLayout {
         }).setHeader("Image").setWidth("60px");
         orderProductGrid.addComponentColumn(orderProduct -> {
             Span quantity = new Span(orderProduct.getQuantity()+"");
+            Div addButton = new Div();
+            addButton.setEnabled(!isDisabled);
             addButton.setText("+");
             addButton.setWidth(20, Unit.PIXELS);
             addButton.setHeight(20, Unit.PIXELS);
-            addButton.addClickListener(buttonClickEvent -> increaseOrderProductQuantity(orderProduct, quantity));
+            addButton.addClickListener(buttonClickEvent ->  increaseOrderProductQuantity(orderProduct, quantity));
+            Div minusButton = new Div();
             minusButton.setText("-");
+            minusButton.setEnabled(!isDisabled);
             minusButton.setWidth(20, Unit.PIXELS);
             minusButton.setHeight(20, Unit.PIXELS);
             minusButton.getStyle().set("font-weight", "bold");
@@ -91,6 +102,10 @@ class ProductOrderMaker extends VerticalLayout {
         if (orderProducts.stream().noneMatch(orderProduct -> orderProduct.getProduct().equals(product))) {
             orderProducts.add(new OrderProduct(product));
             orderProductGrid.getDataProvider().refreshAll();
+            UpdateOrderProductGrid();
+            if (quantityChangeConsumer != null) {
+                quantityChangeConsumer.accept(1);
+            }
         }
 
     }
@@ -99,6 +114,9 @@ class ProductOrderMaker extends VerticalLayout {
         orderProduct.incrementQuantity();
         hasText.setText(orderProduct.getQuantity()+"");
         UpdateOrderProductGrid();
+        if (quantityChangeConsumer != null) {
+            quantityChangeConsumer.accept(orderProduct.getQuantity());
+        }
     }
 
     private void decreaseOrderProductQuantity(OrderProduct orderProduct, HasText hasText) {
@@ -109,6 +127,9 @@ class ProductOrderMaker extends VerticalLayout {
             // to update the price
         }
         UpdateOrderProductGrid();
+        if (quantityChangeConsumer != null) {
+            quantityChangeConsumer.accept(orderProduct.getQuantity());
+        }
     }
 
     private HorizontalLayout addToOrderField() {
@@ -142,9 +163,9 @@ class ProductOrderMaker extends VerticalLayout {
 
     public void disableCartButtons(boolean shouldDisable) {
         addToOrderButton.setEnabled(!shouldDisable);
-        addButton.setEnabled(!shouldDisable);
-        minusButton.setEnabled(!shouldDisable);
+        isDisabled = shouldDisable;
         productAddToOrderButton.setEnabled(!shouldDisable);
+        productSearch.setEnabled(!shouldDisable);
     }
 
     private void UpdateOrderProductGrid() {

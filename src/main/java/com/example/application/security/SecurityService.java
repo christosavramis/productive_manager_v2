@@ -1,5 +1,6 @@
 package com.example.application.security;
 
+import com.example.application.backend.data.EmployeeRole;
 import com.example.application.backend.data.entity.Employee;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.server.VaadinServletRequest;
@@ -28,5 +29,9 @@ public class SecurityService {
         SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
         logoutHandler.logout(VaadinServletRequest.getCurrent().getHttpServletRequest(), null,
                 null);
+    }
+
+    public boolean isAdmin() {
+        return EmployeeRole.ADMIN.equals(getAuthenticatedUser().getRole());
     }
 }

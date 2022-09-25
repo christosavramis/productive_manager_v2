@@ -20,7 +20,7 @@ public class Order extends AbstractEntity {
 
     private LocalDateTime timeOrdered;
 
-    private OrderStatus status;
+    private OrderStatus status = OrderStatus.NEW;
 
     private double price;
 

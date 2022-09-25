@@ -1,6 +1,7 @@
 package com.example.application.app.generator;
 
 import com.example.application.backend.data.EmployeeRole;
+import com.example.application.backend.data.InventoryPolicies;
 import com.example.application.backend.data.OrderStatus;
 import com.example.application.backend.data.ProductStatus;
 import com.example.application.backend.data.entity.*;
@@ -10,9 +11,7 @@ import com.example.application.security.SecurityService;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 
 import java.time.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
@@ -31,8 +30,8 @@ public class DataGenerator {
     public CommandLineRunner loadData(CategoryService categoryService, ProductService productService,
                                       TaxService taxService, CustomerService customerService,
                                       OrderService orderService, ProductSupplierService productSupplierService,
-                                      EmployeeService employeeService,
-                                      SecurityService securityService) {
+                                      EmployeeService employeeService, SecurityService securityService,
+                                      PolicyService policyService) {
 
         return args -> {
 
@@ -41,8 +40,12 @@ public class DataGenerator {
             }
 
             List<Employee> employees = List.of(
-                    Employee.builder().name("Administrator").username("admin").password("admin").role(EmployeeRole.ADMIN).build(),
-                    Employee.builder().name("Simple employee").username("user").password("user").role(EmployeeRole.BASIC).build()
+                    Employee.builder().name("Chris").username("admin").password("admin").role(EmployeeRole.ADMIN).build(),
+                    Employee.builder().name("John").username("john").password("john").role(EmployeeRole.USER).build(),
+                    Employee.builder().name("Nick").username("nick").password("nick").role(EmployeeRole.USER).build(),
+                    Employee.builder().name("Walter").username("walter").password("walter").role(EmployeeRole.USER).build(),
+                    Employee.builder().name("Jack").username("jack").password("jack").role(EmployeeRole.USER).build(),
+                    Employee.builder().name("Panos").username("panos").password("panos").role(EmployeeRole.USER).build()
             );
 
             employeeService.saveAll(employees);
@@ -157,7 +160,13 @@ public class DataGenerator {
             );
             customerService.saveAll(customers);
 
-            orderService.saveAll(generateRandomOrders(products, customers, List.of(OrderStatus.CANCELED, OrderStatus.CLOSED)));
+            List<Order> orderList = generateRandomOrders(products, customers, List.of(OrderStatus.CANCELLED, OrderStatus.PAID));
+            orderList.sort(Comparator.comparing(Order::getTimeOrdered).reversed());
+            orderService.saveAll(orderList);
+
+            List<Policy> policies = List.of(InventoryPolicies.STOCK_POLICY.getPolicy());
+            policyService.saveAll(policies);
+
             logger.info("Generated demo data");
         };
     }

@@ -6,6 +6,7 @@ import com.example.application.backend.data.entity.Employee;
 import com.example.application.backend.data.entity.Tax;
 import com.example.application.backend.service.EmployeeService;
 import com.example.application.backend.service.TaxService;
+import com.example.application.security.SecurityService;
 import com.example.application.ui.MainLayout;
 import com.example.application.ui.crud.AbstractCrudView;
 import com.example.application.ui.views.forms.EmployeeForm;
@@ -23,8 +24,9 @@ import javax.annotation.security.PermitAll;
 @PermitAll
 public class EmployeeView extends AbstractCrudView<Employee> {
 
-    public EmployeeView(EmployeeService employeeService) {
+    public EmployeeView(EmployeeService employeeService, SecurityService securityService) {
         super("employee", new EmployeeForm(), employeeService, Employee::new);
+        setEnabledAddItemButton(securityService.isAdmin());
     }
 
     @Override

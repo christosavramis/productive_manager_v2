@@ -28,6 +28,7 @@ public class AbstractCrudView<T> extends VerticalLayout {
     private final @Getter HorizontalLayout content = new HorizontalLayout();
     private @Autowired NotificationManager notificationManager;
     private @Autowired AuditService auditService;
+    private Button addNewItemButton;
 
     public AbstractCrudView(String toolbarName, AbstractForm<T> genericForm, AbstractService<T> abstractService, Supplier<T> supplier) {
         this.toolbarName = toolbarName;
@@ -45,12 +46,16 @@ public class AbstractCrudView<T> extends VerticalLayout {
     }
 
     private HorizontalLayout getToolbar() {
-        Button addContactButton = new Button("Add "+toolbarName);
-        addContactButton.addClickListener(click -> addItem());
+        addNewItemButton = new Button("Add "+toolbarName);
+        addNewItemButton.addClickListener(click -> addItem());
 
-        HorizontalLayout toolbar = new HorizontalLayout(addContactButton);
+        HorizontalLayout toolbar = new HorizontalLayout(addNewItemButton);
         toolbar.addClassName("toolbar");
         return toolbar;
+    }
+
+    public void setEnabledAddItemButton(boolean enabled) {
+        addNewItemButton.setEnabled(enabled);
     }
 
     private void configureForm() {
@@ -66,7 +71,7 @@ public class AbstractCrudView<T> extends VerticalLayout {
         return content;
     }
 
-    private void updateList() {
+    public void updateList() {
         grid.setItems(abstractService.findAll());
     }
 
@@ -124,7 +129,7 @@ public class AbstractCrudView<T> extends VerticalLayout {
         }
     }
 
-    private void closeEditor() {
+    protected void closeEditor() {
         genericForm.setFormObjectSync(null);
         genericForm.setVisible(false);
         removeClassName("editing");
