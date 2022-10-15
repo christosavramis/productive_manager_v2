@@ -28,7 +28,7 @@ import java.util.stream.Stream;
 public class OrderView extends AbstractCrudView<Order> {
     private final OrderService orderService;
     public OrderView(OrderService orderService, ProductService productService, CustomerService customerService, PolicyHelper policyHelper) {
-        super("Order", new OrderForm(productService::findAll, customerService::findAll, orderService, policyHelper), orderService, Order::new);
+        super("Order", new OrderForm(productService::findAllEnabled, customerService::findAll, orderService, policyHelper), orderService, Order::new);
         this.orderService = orderService;
     }
 

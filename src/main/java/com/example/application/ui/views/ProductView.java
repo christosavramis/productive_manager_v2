@@ -10,6 +10,7 @@ import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.data.provider.QuerySortOrder;
+import com.vaadin.flow.data.renderer.LitRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
@@ -53,6 +54,14 @@ public class ProductView extends AbstractCrudView<Product> {
         grid.addColumn(product -> product.getSupplier() != null ? product.getSupplier().getName() : "")
                 .setHeader("Supplier")
                 .setSortOrderProvider(product -> Stream.of(new QuerySortOrder("name", product)));
+        LitRenderer<Product> enabledRenderer = LitRenderer.<Product>of(
+                        "<vaadin-icon icon='vaadin:${item.icon}' style='width: var(--lumo-icon-size-s); height: var(--lumo-icon-size-s); color: ${item.color};'></vaadin-icon>")
+                .withProperty("icon", enabled -> enabled.isEnabled() ? "check" : "minus").withProperty("color",
+                        enabled -> enabled.isEnabled()
+                                ? "var(--lumo-primary-text-color)"
+                                : "var(--lumo-disabled-text-color)");
+
+        grid.addColumn(enabledRenderer).setHeader("Enabled").setAutoWidth(true);
         super.configureGrid(grid);
     }
 }

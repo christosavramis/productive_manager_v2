@@ -25,4 +25,8 @@ public class ProductService extends AbstractService<Product> {
     public List<Product> findAll() {
         return super.findAll().stream().filter(product -> !product.isMarkedForDelete()).collect(Collectors.toList());
     }
+
+    public List<Product> findAllEnabled() {
+        return super.findAll().stream().filter(Product::isEnabled).collect(Collectors.toList());
+    }
 }

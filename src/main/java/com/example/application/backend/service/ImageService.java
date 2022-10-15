@@ -15,8 +15,8 @@ import java.time.LocalDateTime;
 @Service
 public class ImageService {
     private @Autowired AuditService auditService;
-    public static final String IMAGE_FOLDER_PATH_SAVE = "./src/main/resources/META-INF/resources/images/product/";
-    public static final String IMAGE_FOLDER_PATH_DISPLAY = "./images/product/";
+    public final static String IMAGE_FOLDER_PATH_SAVE = "./static/images/";
+    public final static String IMAGE_FOLDER_PATH_DISPLAY = "./images/";
 
     public String saveImage(String name, String saveName, MultiFileMemoryBuffer buffer) {
         String location = "";

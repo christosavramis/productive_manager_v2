@@ -3,7 +3,6 @@ package com.example.application.backend.data.entity;
 
 
 
-import com.example.application.backend.data.ProductStatus;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,9 +26,7 @@ public class Product extends AbstractEntity {
 //    @Min(value = 0, message = "Minimum quantity is 0")
     private int quantity;
 
-    @Enumerated(EnumType.STRING)
-    @NotNull(message = "Please select a status")
-    private ProductStatus status;
+    private boolean enabled;
 
     @ManyToOne(cascade = CascadeType.MERGE, optional = false)
     @JoinColumn
@@ -56,7 +53,6 @@ public class Product extends AbstractEntity {
                 .price(price)
                 .cost(cost)
                 .quantity(quantity)
-                .status(status)
                 .category(category)
                 .tax(tax)
                 .imageUrl(imageUrl)
@@ -75,10 +71,12 @@ public class Product extends AbstractEntity {
                 ", price=" + price +
                 ", cost=" + cost +
                 ", quantity=" + quantity +
-                ", status=" + status +
+                ", enabled=" + enabled +
                 ", category=" + category +
+                ", supplier=" + supplier +
                 ", tax=" + tax +
                 ", imageUrl='" + imageUrl + '\'' +
+                ", markedForDelete=" + markedForDelete +
                 ", barcode='" + barcode + '\'' +
                 '}';
     }

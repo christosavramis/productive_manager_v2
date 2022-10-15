@@ -1,14 +1,13 @@
 package com.example.application.ui.views.forms;
 
-import com.example.application.backend.data.ProductStatus;
 import com.example.application.backend.data.entity.ProductSupplier;
-import com.example.application.backend.service.ProductSupplierService;
 import com.example.application.backend.util.StringUtil;
 import com.example.application.backend.data.entity.Category;
 import com.example.application.backend.data.entity.Product;
 import com.example.application.backend.data.entity.Tax;
 import com.example.application.backend.service.ImageService;
 import com.example.application.ui.crud.AbstractForm;
+import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;
@@ -29,9 +28,9 @@ public class ProductForm extends AbstractForm<Product> {
   ComboBox<Category> category = new ComboBox<>("category");
   ComboBox<Tax> tax = new ComboBox<>("tax");
   ComboBox<ProductSupplier> supplier = new ComboBox<>("supplier");
+  Checkbox enabled = new Checkbox("enabled");
   private Upload upload;
   private ImageService imageService;
-  private final ComboBox<ProductStatus> status = new ComboBox("status");
 
   public void setCategories(List<Category> categories) {
     category.setItems(categories);
@@ -64,8 +63,7 @@ public class ProductForm extends AbstractForm<Product> {
     supplier.setItemLabelGenerator(ProductSupplier::getName);
 
     initUploaderImage();
-    status.setItems(List.of(ProductStatus.values()));
-    add(name, barcode, imageUrl, upload, category, tax, supplier, cost, price, quantity, status);
+    add(name, barcode, imageUrl, upload, category, tax, supplier, cost, price, quantity, enabled);
     addButtons();
   }
 
