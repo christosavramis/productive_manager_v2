@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 
-import static com.example.application.backend.service.ImageService.IMAGE_FOLDER_PATH_DISPLAY;
+import static com.example.application.backend.service.ImageService.IMAGE_FOLDER_PATH_DISPLAY_GEN;
 
 @SpringComponent
 public class DataGenerator {
@@ -79,73 +79,73 @@ public class DataGenerator {
                     //Energy Drinks
                     Product.builder().name("Hell 250ml").category(categories.get(0)).price(0.71).cost(0.50)
                             .tax(taxes.get(0)).enabled(true).quantity(StringUtil.getRandomNumber(100, 300))
-                            .imageUrl(IMAGE_FOLDER_PATH_DISPLAY + "Hell" + ".png")
+                            .imageUrl(IMAGE_FOLDER_PATH_DISPLAY_GEN + "Hell" + ".png")
                             .barcode(RandomStringUtils.randomNumeric(14))
                             .supplier((ProductSupplier) StringUtil.getRandomOfList(productSuppliers))
                             .build(),
                     Product.builder().name("Monster 500ml").category(categories.get(0)).price(1.39).cost(0.80)
                             .tax(taxes.get(0)).enabled(true).quantity(StringUtil.getRandomNumber(100, 300))
-                            .imageUrl(IMAGE_FOLDER_PATH_DISPLAY + "Monster" + ".png")
+                            .imageUrl(IMAGE_FOLDER_PATH_DISPLAY_GEN + "Monster" + ".png")
                             .barcode(RandomStringUtils.randomNumeric(14))
                             .supplier((ProductSupplier) StringUtil.getRandomOfList(productSuppliers))
                             .build(),
                     Product.builder().name("Red Bull 250ml").category(categories.get(0)).price(1.18).cost(0.60)
                             .tax(taxes.get(0)).enabled(true).quantity(StringUtil.getRandomNumber(100, 300))
-                            .imageUrl(IMAGE_FOLDER_PATH_DISPLAY + "RedBull" + ".png")
+                            .imageUrl(IMAGE_FOLDER_PATH_DISPLAY_GEN + "RedBull" + ".png")
                             .barcode(RandomStringUtils.randomNumeric(14))
                             .supplier((ProductSupplier) StringUtil.getRandomOfList(productSuppliers))
                             .build(),
                     Product.builder().name("Coca Cola 500ml").category(categories.get(1)).price(0.90).cost(0.45)
                             .tax(taxes.get(0)).enabled(true).quantity(StringUtil.getRandomNumber(100, 300))
-                            .imageUrl(IMAGE_FOLDER_PATH_DISPLAY + "CocaCola" + ".png")
+                            .imageUrl(IMAGE_FOLDER_PATH_DISPLAY_GEN + "CocaCola" + ".png")
                             .barcode(RandomStringUtils.randomNumeric(14))
                             .supplier((ProductSupplier) StringUtil.getRandomOfList(productSuppliers))
                             .build(),
                     Product.builder().name("Fanta Orange 500ml").category(categories.get(1)).price(0.74).cost(0.30)
                             .tax(taxes.get(0)).enabled(true).quantity(StringUtil.getRandomNumber(100, 300))
-                            .imageUrl(IMAGE_FOLDER_PATH_DISPLAY + "FantaOrange" + ".png")
+                            .imageUrl(IMAGE_FOLDER_PATH_DISPLAY_GEN + "FantaOrange" + ".png")
                             .barcode(RandomStringUtils.randomNumeric(14))
                             .supplier((ProductSupplier) StringUtil.getRandomOfList(productSuppliers))
                             .build(),
                     Product.builder().name("Fanta Lemon 1,5L").category(categories.get(1)).price(1.47).cost(0.80)
                             .tax(taxes.get(0)).enabled(true).quantity(StringUtil.getRandomNumber(100, 300))
-                            .imageUrl(IMAGE_FOLDER_PATH_DISPLAY + "FantaLemon" + ".png")
+                            .imageUrl(IMAGE_FOLDER_PATH_DISPLAY_GEN + "FantaLemon" + ".png")
                             .barcode(RandomStringUtils.randomNumeric(14))
                             .supplier((ProductSupplier) StringUtil.getRandomOfList(productSuppliers))
                             .build(),
                     Product.builder().name("Ruffles ketchup").category(categories.get(2)).price(1.40).cost(0.70)
                             .tax(taxes.get(0)).enabled(true).quantity(StringUtil.getRandomNumber(100, 300))
-                            .imageUrl(IMAGE_FOLDER_PATH_DISPLAY + "ruffles_ketchap" + ".png")
+                            .imageUrl(IMAGE_FOLDER_PATH_DISPLAY_GEN + "ruffles_ketchap" + ".png")
                             .barcode(RandomStringUtils.randomNumeric(14))
                             .supplier((ProductSupplier) StringUtil.getRandomOfList(productSuppliers))
                             .build(),
                     Product.builder().name("Ruffles Barbeque").category(categories.get(2)).price(1.70).cost(0.88)
                             .tax(taxes.get(0)).enabled(true).quantity(StringUtil.getRandomNumber(100, 300))
-                            .imageUrl(IMAGE_FOLDER_PATH_DISPLAY + "ruffles_barbeque" + ".png")
+                            .imageUrl(IMAGE_FOLDER_PATH_DISPLAY_GEN + "ruffles_barbeque" + ".png")
                             .barcode(RandomStringUtils.randomNumeric(14))
                             .supplier((ProductSupplier) StringUtil.getRandomOfList(productSuppliers))
                             .build(),
                     Product.builder().name("Ruffles Salt").category(categories.get(2)).price(1.60).cost(0.90)
                             .tax(taxes.get(0)).enabled(true).quantity(StringUtil.getRandomNumber(100, 300))
-                            .imageUrl(IMAGE_FOLDER_PATH_DISPLAY + "ruffles_salt" + ".png")
+                            .imageUrl(IMAGE_FOLDER_PATH_DISPLAY_GEN + "ruffles_salt" + ".png")
                             .barcode(RandomStringUtils.randomNumeric(14))
                             .supplier((ProductSupplier) StringUtil.getRandomOfList(productSuppliers))
                             .build(),
                     Product.builder().name("Chivas Regal Scotch").category(categories.get(3)).price(69.80).cost(35.80)
                             .tax(taxes.get(0)).enabled(true).quantity(StringUtil.getRandomNumber(100, 300))
-                            .imageUrl(IMAGE_FOLDER_PATH_DISPLAY + "ChivasRegalScotch" + ".png")
+                            .imageUrl(IMAGE_FOLDER_PATH_DISPLAY_GEN + "ChivasRegalScotch" + ".png")
                             .barcode(RandomStringUtils.randomNumeric(14))
                             .supplier((ProductSupplier) StringUtil.getRandomOfList(productSuppliers))
                             .build(),
                     Product.builder().name("Serkova Votka").category(categories.get(3)).price(14.25).cost(8.25)
                             .tax(taxes.get(0)).enabled(true).quantity(StringUtil.getRandomNumber(100, 300))
-                            .imageUrl(IMAGE_FOLDER_PATH_DISPLAY + "SerkovaVotka" + ".png")
+                            .imageUrl(IMAGE_FOLDER_PATH_DISPLAY_GEN + "SerkovaVotka" + ".png")
                             .barcode(RandomStringUtils.randomNumeric(14))
                             .supplier((ProductSupplier) StringUtil.getRandomOfList(productSuppliers))
                             .build(),
                     Product.builder().name("Johnnie Walker Scotch").category(categories.get(3)).price(43.20).cost(23.20)
                             .tax(taxes.get(0)).enabled(true).quantity(StringUtil.getRandomNumber(100, 300))
-                            .imageUrl(IMAGE_FOLDER_PATH_DISPLAY + "JohnnieWalker" + ".png")
+                            .imageUrl(IMAGE_FOLDER_PATH_DISPLAY_GEN + "JohnnieWalker" + ".png")
                             .barcode(RandomStringUtils.randomNumeric(14))
                             .supplier((ProductSupplier) StringUtil.getRandomOfList(productSuppliers))
                             .build()

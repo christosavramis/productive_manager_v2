@@ -10,6 +10,8 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 
 @Service
@@ -17,6 +19,8 @@ public class ImageService {
     private @Autowired AuditService auditService;
     public final static String IMAGE_FOLDER_PATH_SAVE = "./static/images/";
     public final static String IMAGE_FOLDER_PATH_DISPLAY = "./images/";
+
+    public final static String IMAGE_FOLDER_PATH_DISPLAY_GEN = "./images/product/";
 
     public String saveImage(String name, String saveName, MultiFileMemoryBuffer buffer) {
         String location = "";
