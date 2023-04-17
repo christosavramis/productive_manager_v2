@@ -3,7 +3,7 @@ package com.example.application.ui.views;
 
 
 import com.example.application.backend.data.AuditType;
-import com.example.application.backend.data.entity.Audit;
+import com.example.application.backend.data.entities.Audit;
 import com.example.application.backend.service.AuditService;
 import com.example.application.backend.util.StringUtil;
 import com.example.application.ui.MainLayout;

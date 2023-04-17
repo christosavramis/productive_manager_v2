@@ -1,4 +1,4 @@
-package com.example.application.backend.data.entity;
+package com.example.application.backend.data.entities;
 
 
 

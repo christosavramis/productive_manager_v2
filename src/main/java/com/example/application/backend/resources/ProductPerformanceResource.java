@@ -1,6 +1,6 @@
 package com.example.application.backend.resources;
 
-import com.example.application.backend.data.entity.Product;
+import com.example.application.backend.data.entities.Product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

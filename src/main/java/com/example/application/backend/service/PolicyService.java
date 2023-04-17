@@ -1,6 +1,6 @@
 package com.example.application.backend.service;
 
-import com.example.application.backend.data.entity.Policy;
+import com.example.application.backend.data.entities.Policy;
 import com.example.application.backend.repository.PolicyRepository;
 import org.springframework.stereotype.Service;
 

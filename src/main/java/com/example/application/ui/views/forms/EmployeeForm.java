@@ -1,8 +1,7 @@
 package com.example.application.ui.views.forms;
 
 import com.example.application.backend.data.EmployeeRole;
-import com.example.application.backend.data.entity.Employee;
-import com.example.application.backend.util.StringUtil;
+import com.example.application.backend.data.entities.Employee;
 import com.example.application.ui.crud.AbstractForm;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.textfield.PasswordField;

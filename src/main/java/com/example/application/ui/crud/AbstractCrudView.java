@@ -1,12 +1,11 @@
 package com.example.application.ui.crud;
 
 import com.example.application.backend.data.AuditType;
-import com.example.application.backend.data.entity.Audit;
+import com.example.application.backend.data.entities.Audit;
 import com.example.application.backend.exceptions.DuplicateFieldException;
 import com.example.application.backend.exceptions.ReferentialIntegrityException;
 import com.example.application.backend.service.AbstractService;
 import com.example.application.backend.service.AuditService;
-import com.example.application.ui.views.NotificationManager;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
@@ -19,15 +18,15 @@ import java.time.LocalDateTime;
 import java.util.function.Supplier;
 
 public class AbstractCrudView<T> extends VerticalLayout {
-    private T viewObject;
-    private @Getter final AbstractForm<T> genericForm;
+    @Getter
+    private final AbstractForm<T> genericForm;
     private @Getter Grid<T> grid = new Grid<>();
     private final String toolbarName;
-    private final AbstractService<T> abstractService;
-    private final Supplier<T> supplier;
+    private final transient AbstractService<T> abstractService;
+    private final transient Supplier<T> supplier;
     private final @Getter HorizontalLayout content = new HorizontalLayout();
-    private @Autowired NotificationManager notificationManager;
-    private @Autowired AuditService auditService;
+    @Autowired
+    private transient AuditService auditService;
     private Button addNewItemButton;
 
     public AbstractCrudView(String toolbarName, AbstractForm<T> genericForm, AbstractService<T> abstractService, Supplier<T> supplier) {
@@ -46,7 +45,7 @@ public class AbstractCrudView<T> extends VerticalLayout {
     }
 
     public void disableAddNewItemButton(){
-        addNewItemButton.setEnabled(false);
+        addNewItemButton.setVisible(false);
     }
 
     private HorizontalLayout getToolbar() {

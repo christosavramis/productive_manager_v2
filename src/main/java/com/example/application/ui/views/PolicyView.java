@@ -1,7 +1,6 @@
 package com.example.application.ui.views;
 
-import com.example.application.backend.data.entity.Policy;
-import com.example.application.backend.data.entity.Tax;
+import com.example.application.backend.data.entities.Policy;
 import com.example.application.backend.service.PolicyService;
 import com.example.application.ui.MainLayout;
 import com.example.application.ui.crud.AbstractCrudView;

@@ -1,11 +1,10 @@
-package com.example.application.backend.data.entity;
+package com.example.application.backend.data.entities;
 
 import lombok.*;
 
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.*;
 import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;

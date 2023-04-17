@@ -1,7 +1,7 @@
 package com.example.application.ui.views.forms;
 
 
-import com.example.application.backend.data.entity.Tax;
+import com.example.application.backend.data.entities.Tax;
 import com.example.application.ui.crud.AbstractForm;
 import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;

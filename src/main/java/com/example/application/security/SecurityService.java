@@ -1,11 +1,10 @@
 package com.example.application.security;
 
 import com.example.application.backend.data.EmployeeRole;
-import com.example.application.backend.data.entity.Employee;
+import com.example.application.backend.data.entities.Employee;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.server.VaadinServletRequest;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Component;

@@ -1,9 +1,9 @@
 package com.example.application.backend.service;
 
 import com.example.application.backend.data.OrderStatus;
-import com.example.application.backend.data.entity.Customer;
-import com.example.application.backend.data.entity.Order;
-import com.example.application.backend.data.entity.Product;
+import com.example.application.backend.data.entities.Customer;
+import com.example.application.backend.data.entities.Order;
+import com.example.application.backend.data.entities.Product;
 import com.example.application.backend.resources.ProductPerformanceResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

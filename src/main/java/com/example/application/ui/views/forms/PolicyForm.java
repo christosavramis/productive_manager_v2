@@ -1,9 +1,7 @@
 package com.example.application.ui.views.forms;
 
 
-import com.example.application.backend.data.entity.Customer;
-import com.example.application.backend.data.entity.Order;
-import com.example.application.backend.data.entity.Policy;
+import com.example.application.backend.data.entities.Policy;
 import com.example.application.ui.crud.AbstractForm;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.html.H1;

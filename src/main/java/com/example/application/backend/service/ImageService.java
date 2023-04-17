@@ -1,7 +1,7 @@
 package com.example.application.backend.service;
 
 import com.example.application.backend.data.AuditType;
-import com.example.application.backend.data.entity.Audit;
+import com.example.application.backend.data.entities.Audit;
 import com.vaadin.flow.component.upload.receivers.MultiFileMemoryBuffer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,8 +10,6 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 
 @Service

@@ -1,6 +1,6 @@
 package com.example.application.backend.service;
 
-import com.example.application.backend.data.entity.Tax;
+import com.example.application.backend.data.entities.Tax;
 import com.example.application.backend.repository.TaxRepository;
 import org.springframework.stereotype.Service;
 

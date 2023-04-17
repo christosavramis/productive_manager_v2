@@ -1,6 +1,6 @@
-package com.example.application.backend.data;
+package com.example.application.backend.service;
 
-import com.example.application.backend.service.PolicyService;
+import com.example.application.backend.data.InventoryPolicies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

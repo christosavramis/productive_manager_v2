@@ -1,7 +1,7 @@
 package com.example.application.ui.crud;
 
 import com.example.application.backend.data.AuditType;
-import com.example.application.backend.data.entity.Audit;
+import com.example.application.backend.data.entities.Audit;
 import com.example.application.backend.service.AuditService;
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;

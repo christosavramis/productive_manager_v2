@@ -1,8 +1,7 @@
 package com.example.application.ui.views;
 
 import com.example.application.backend.data.AuditType;
-import com.example.application.backend.data.entity.Audit;
-import com.example.application.backend.exceptions.DuplicateFieldException;
+import com.example.application.backend.data.entities.Audit;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -12,8 +11,6 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component

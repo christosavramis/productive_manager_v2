@@ -1,7 +1,7 @@
 package com.example.application.backend.data;
 
-import com.example.application.backend.data.entity.Policy;
-import com.example.application.backend.data.entity.StringJPA;
+import com.example.application.backend.data.entities.Policy;
+import com.example.application.backend.data.entities.StringJPA;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

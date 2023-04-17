@@ -1,6 +1,6 @@
 package com.example.application.ui.views;
 
-import com.example.application.backend.data.entity.Product;
+import com.example.application.backend.data.entities.Product;
 import com.example.application.backend.service.*;
 import com.example.application.backend.util.StringUtil;
 import com.example.application.ui.MainLayout;

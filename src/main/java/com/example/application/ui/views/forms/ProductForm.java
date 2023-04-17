@@ -1,10 +1,10 @@
 package com.example.application.ui.views.forms;
 
-import com.example.application.backend.data.entity.ProductSupplier;
+import com.example.application.backend.data.entities.ProductSupplier;
 import com.example.application.backend.util.StringUtil;
-import com.example.application.backend.data.entity.Category;
-import com.example.application.backend.data.entity.Product;
-import com.example.application.backend.data.entity.Tax;
+import com.example.application.backend.data.entities.Category;
+import com.example.application.backend.data.entities.Product;
+import com.example.application.backend.data.entities.Tax;
 import com.example.application.backend.service.ImageService;
 import com.example.application.ui.crud.AbstractForm;
 import com.vaadin.flow.component.checkbox.Checkbox;

@@ -1,6 +1,6 @@
 package com.example.application.backend.service;
 
-import com.example.application.backend.data.entity.Category;
+import com.example.application.backend.data.entities.Category;
 import com.example.application.backend.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
 

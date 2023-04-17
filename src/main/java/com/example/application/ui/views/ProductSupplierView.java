@@ -1,6 +1,6 @@
 package com.example.application.ui.views;
 
-import com.example.application.backend.data.entity.ProductSupplier;
+import com.example.application.backend.data.entities.ProductSupplier;
 import com.example.application.backend.service.ProductSupplierService;
 import com.example.application.ui.MainLayout;
 import com.example.application.ui.crud.AbstractCrudView;

@@ -2,7 +2,7 @@ package com.example.application.ui.views;
 
 
 
-import com.example.application.backend.data.entity.Tax;
+import com.example.application.backend.data.entities.Tax;
 import com.example.application.backend.service.TaxService;
 import com.example.application.ui.MainLayout;
 import com.example.application.ui.crud.AbstractCrudView;

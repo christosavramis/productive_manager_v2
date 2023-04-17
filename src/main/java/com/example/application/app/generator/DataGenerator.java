@@ -3,7 +3,7 @@ package com.example.application.app.generator;
 import com.example.application.backend.data.EmployeeRole;
 import com.example.application.backend.data.InventoryPolicies;
 import com.example.application.backend.data.OrderStatus;
-import com.example.application.backend.data.entity.*;
+import com.example.application.backend.data.entities.*;
 import com.example.application.backend.service.*;
 import com.example.application.backend.util.StringUtil;
 import com.example.application.security.SecurityService;

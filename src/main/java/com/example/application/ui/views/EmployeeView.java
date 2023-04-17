@@ -2,17 +2,13 @@ package com.example.application.ui.views;
 
 
 
-import com.example.application.backend.data.entity.Employee;
-import com.example.application.backend.data.entity.Tax;
+import com.example.application.backend.data.entities.Employee;
 import com.example.application.backend.service.EmployeeService;
-import com.example.application.backend.service.TaxService;
 import com.example.application.security.SecurityService;
 import com.example.application.ui.MainLayout;
 import com.example.application.ui.crud.AbstractCrudView;
 import com.example.application.ui.views.forms.EmployeeForm;
-import com.example.application.ui.views.forms.TaxForm;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 

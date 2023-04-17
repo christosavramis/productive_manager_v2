@@ -1,14 +1,11 @@
 package com.example.application.ui.views.forms;
 
-import com.example.application.backend.data.InventoryPolicies;
 import com.example.application.backend.data.OrderStatus;
-import com.example.application.backend.data.PolicyHelper;
-import com.example.application.backend.data.entity.*;
+import com.example.application.backend.service.PolicyHelper;
+import com.example.application.backend.data.entities.*;
 import com.example.application.backend.service.OrderService;
-import com.example.application.backend.service.PolicyService;
 import com.example.application.backend.util.StringUtil;
 import com.example.application.ui.crud.AbstractForm;
-import com.example.application.ui.views.NotificationManager;
 import com.example.application.ui.views.OrderView;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.button.Button;

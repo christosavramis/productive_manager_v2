@@ -1,6 +1,6 @@
 package com.example.application.backend.repository;
 
-import com.example.application.backend.data.entity.Tax;
+import com.example.application.backend.data.entities.Tax;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

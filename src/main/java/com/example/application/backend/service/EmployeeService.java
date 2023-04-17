@@ -1,7 +1,7 @@
 package com.example.application.backend.service;
 
 import com.example.application.backend.data.EmployeeRole;
-import com.example.application.backend.data.entity.Employee;
+import com.example.application.backend.data.entities.Employee;
 import com.example.application.backend.repository.EmployeeRepository;
 import com.example.application.security.SecurityService;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,9 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service

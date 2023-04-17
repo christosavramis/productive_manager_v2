@@ -1,6 +1,6 @@
 package com.example.application.backend.service;
 
-import com.example.application.backend.data.entity.ProductSupplier;
+import com.example.application.backend.data.entities.ProductSupplier;
 import com.example.application.backend.repository.ProductSupplierRepository;
 import org.springframework.stereotype.Service;
 

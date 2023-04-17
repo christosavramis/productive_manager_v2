@@ -1,6 +1,6 @@
 package com.example.application.ui.views;
 
-import com.example.application.backend.data.entity.Category;
+import com.example.application.backend.data.entities.Category;
 import com.example.application.backend.service.CategoryService;
 import com.example.application.ui.MainLayout;
 import com.example.application.ui.crud.AbstractCrudView;

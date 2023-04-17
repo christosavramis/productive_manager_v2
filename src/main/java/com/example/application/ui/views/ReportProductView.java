@@ -2,21 +2,19 @@ package com.example.application.ui.views;
 
 
 
-import com.example.application.backend.data.entity.Customer;
-import com.example.application.backend.data.entity.Product;
+import com.example.application.backend.data.entities.Customer;
+import com.example.application.backend.data.entities.Product;
 import com.example.application.backend.resources.ProductPerformanceResource;
 import com.example.application.backend.service.CustomerService;
 import com.example.application.backend.service.ReportService;
 import com.example.application.backend.util.StringUtil;
 import com.example.application.ui.MainLayout;
-import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;

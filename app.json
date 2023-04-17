@@ -1,8 +1,0 @@
-{
-  "name" : "flowcrmtutorial-1.0-SNAPSHOT",
-"buildpacks" : [
-  {
-    "url": "heroku/maven"
-  }
-  ]
-}

@@ -1,7 +1,7 @@
 package com.example.application.ui.views.forms;
 
-import com.example.application.backend.data.entity.OrderProduct;
-import com.example.application.backend.data.entity.Product;
+import com.example.application.backend.data.entities.OrderProduct;
+import com.example.application.backend.data.entities.Product;
 import com.example.application.backend.util.StringUtil;
 import com.vaadin.flow.component.HasText;
 import com.vaadin.flow.component.Unit;

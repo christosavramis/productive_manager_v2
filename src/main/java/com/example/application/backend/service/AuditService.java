@@ -1,7 +1,7 @@
 package com.example.application.backend.service;
 
-import com.example.application.backend.data.entity.Audit;
-import com.example.application.backend.data.entity.Employee;
+import com.example.application.backend.data.entities.Audit;
+import com.example.application.backend.data.entities.Employee;
 import com.example.application.backend.exceptions.DuplicateFieldException;
 import com.example.application.backend.repository.AuditRepository;
 import com.example.application.backend.util.StringUtil;

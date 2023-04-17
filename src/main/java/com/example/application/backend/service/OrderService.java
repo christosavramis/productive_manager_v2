@@ -1,13 +1,11 @@
 package com.example.application.backend.service;
 
 import com.example.application.backend.data.OrderStatus;
-import com.example.application.backend.data.entity.AbstractEntity;
-import com.example.application.backend.data.entity.Order;
-import com.example.application.backend.data.entity.OrderProduct;
-import com.example.application.backend.data.entity.Product;
+import com.example.application.backend.data.entities.Order;
+import com.example.application.backend.data.entities.OrderProduct;
+import com.example.application.backend.data.entities.Product;
 import com.example.application.backend.repository.OrderRepository;
 import com.example.application.backend.repository.ProductRepository;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Service;
 
 @Service

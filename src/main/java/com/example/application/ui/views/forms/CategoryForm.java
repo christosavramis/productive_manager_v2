@@ -1,6 +1,6 @@
 package com.example.application.ui.views.forms;
 
-import com.example.application.backend.data.entity.Category;
+import com.example.application.backend.data.entities.Category;
 import com.example.application.ui.crud.AbstractForm;
 import com.vaadin.flow.component.textfield.TextField;
 

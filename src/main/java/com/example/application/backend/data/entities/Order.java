@@ -1,9 +1,7 @@
-package com.example.application.backend.data.entity;
+package com.example.application.backend.data.entities;
 
 import com.example.application.backend.data.OrderStatus;
-import com.example.application.backend.service.ProductService;
 import lombok.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

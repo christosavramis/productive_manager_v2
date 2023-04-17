@@ -1,7 +1,7 @@
 package com.example.application.backend.service;
 
 import com.example.application.backend.data.AuditType;
-import com.example.application.backend.data.entity.Audit;
+import com.example.application.backend.data.entities.Audit;
 import com.example.application.backend.exceptions.DuplicateFieldException;
 import com.example.application.backend.exceptions.ReferentialIntegrityException;
 import org.springframework.beans.factory.annotation.Autowired;
