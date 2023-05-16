@@ -111,7 +111,7 @@ public class AbstractCrudView<T> extends VerticalLayout {
         try {
             abstractService.save(event.getFormObject());
             updateList();
-            genericForm.updateChildItemsOnStateChange();
+//            genericForm.updateChildItemsOnStateChange();
             auditService.save(new Audit(LocalDateTime.now(), "Saved item successfully", AuditType.INFO), this.getClass());
             closeEditor();
         } catch (DuplicateFieldException e) {
@@ -124,7 +124,7 @@ public class AbstractCrudView<T> extends VerticalLayout {
         try {
             abstractService.delete(event.getFormObject());
             updateList();
-            genericForm.updateChildItemsOnStateChange();
+//            genericForm.updateChildItemsOnStateChange();
             auditService.save(new Audit(LocalDateTime.now(), "deleted item successfully", AuditType.ERROR), this.getClass());
             closeEditor();
         } catch (ReferentialIntegrityException e) {

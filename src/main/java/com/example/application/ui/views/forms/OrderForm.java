@@ -1,6 +1,7 @@
 package com.example.application.ui.views.forms;
 
 import com.example.application.backend.data.OrderStatus;
+import com.example.application.backend.service.AuditService;
 import com.example.application.backend.service.PolicyHelper;
 import com.example.application.backend.data.entities.*;
 import com.example.application.backend.service.OrderService;
@@ -40,13 +41,18 @@ public class OrderForm extends AbstractForm<Order> {
 
   private final Button cancelButton;
   private PolicyHelper policyHelper;
-  public OrderForm(Supplier<List<Product>> productSupplier, Supplier<List<Customer>> customerSupplier, OrderService orderService, PolicyHelper policyHelper) {
+  private final AuditService auditService;
+  public OrderForm(Supplier<List<Product>> productSupplier, Supplier<List<Customer>> customerSupplier,
+                   OrderService orderService, PolicyHelper policyHelper,
+                   AuditService auditService) {
     super(Order.class, true);
     this.setWidth(30, Unit.PERCENTAGE);
     this.customerSupplier = customerSupplier;
     this.productSupplier = productSupplier;
     this.orderService = orderService;
     this.policyHelper = policyHelper;
+    this.auditService = auditService;
+    
     getBinder().bindInstanceFields(this);
     customer.setItems(customerSupplier.get());
     customer.setItemLabelGenerator(Customer::getName);
@@ -114,7 +120,7 @@ public class OrderForm extends AbstractForm<Order> {
       try {
           getBinder().writeBean(getFormObject());
       } catch (ValidationException e) {
-          throw new RuntimeException(e);
+          AuditService("Error while paying order", e);
       }
       Notification.show("Order paid!").addThemeVariants(NotificationVariant.LUMO_SUCCESS);
       fireEvent(new OrderView.PayEvent(this, getFormObject()));

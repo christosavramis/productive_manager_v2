@@ -32,10 +32,10 @@ public abstract class AbstractForm<S> extends FormLayout {
     private Button save = new Button("Save");
     private Button delete = new Button("Delete");
     private Button close = new Button("Cancel");
-    private List<SyncField<?>> syncFields = new ArrayList<>();
-    public void addSyncField(SyncField syncField) {
-        syncFields.add(syncField);
-    }
+//    private List<SyncField<?>> syncFields = new ArrayList<>();
+//    public void addSyncField(SyncField syncField) {
+//        syncFields.add(syncField);
+//    }
     public @Autowired AuditService auditService;
     private boolean disableDelete;
 
@@ -98,9 +98,9 @@ public abstract class AbstractForm<S> extends FormLayout {
         fireEvent(new CloseEvent(this));
     }
 
-    public void updateChildItemsOnStateChange() {
-        syncFields.forEach(SyncField::run);
-    };
+//    public void updateChildItemsOnStateChange() {
+//        syncFields.forEach(SyncField::run);
+//    };
 
     private HorizontalLayout createButtonsLayout() {
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
