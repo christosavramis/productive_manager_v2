@@ -1,11 +1,8 @@
 package com.example.application.ui.views;
 
 import com.example.application.backend.data.OrderStatus;
-import com.example.application.backend.service.PolicyHelper;
+import com.example.application.backend.service.*;
 import com.example.application.backend.data.entities.Order;
-import com.example.application.backend.service.CustomerService;
-import com.example.application.backend.service.OrderService;
-import com.example.application.backend.service.ProductService;
 import com.example.application.backend.util.StringUtil;
 import com.example.application.ui.MainLayout;
 import com.example.application.ui.crud.AbstractCrudView;
@@ -26,8 +23,8 @@ import java.util.stream.Stream;
 @PermitAll
 public class OrderView extends AbstractCrudView<Order> {
     private final transient OrderService orderService;
-    public OrderView(OrderService orderService, ProductService productService, CustomerService customerService, PolicyHelper policyHelper) {
-        super("Order", new OrderForm(productService::findAllEnabled, customerService::findAll, orderService, policyHelper), orderService, Order::new);
+    public OrderView(OrderService orderService, ProductService productService, CustomerService customerService, PolicyHelper policyHelper, AuditService auditService) {
+        super("Order", new OrderForm(productService::findAllEnabled, customerService::findAll, orderService, policyHelper, auditService), orderService, Order::new);
         this.orderService = orderService;
     }
 

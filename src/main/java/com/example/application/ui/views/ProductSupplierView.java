@@ -16,7 +16,7 @@ import javax.annotation.security.PermitAll;
 @PermitAll
 public class ProductSupplierView extends AbstractCrudView<ProductSupplier> {
     public ProductSupplierView(ProductSupplierService productSupplierService) {
-        super("Tax", new ProductSupplierForm(), productSupplierService, ProductSupplier::new);
+        super("Supplier", new ProductSupplierForm(), productSupplierService, ProductSupplier::new);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.application.ui.views.forms;
 
+import com.example.application.backend.data.AuditType;
 import com.example.application.backend.data.OrderStatus;
 import com.example.application.backend.service.AuditService;
 import com.example.application.backend.service.PolicyHelper;
@@ -20,6 +21,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.binder.ValidationException;
 
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
@@ -120,7 +122,7 @@ public class OrderForm extends AbstractForm<Order> {
       try {
           getBinder().writeBean(getFormObject());
       } catch (ValidationException e) {
-          AuditService("Error while paying order", e);
+          auditService.save(new Audit(LocalDateTime.now(), e.getMessage(), AuditType.ERROR), this.getClass());
       }
       Notification.show("Order paid!").addThemeVariants(NotificationVariant.LUMO_SUCCESS);
       fireEvent(new OrderView.PayEvent(this, getFormObject()));

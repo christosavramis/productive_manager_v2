@@ -12,7 +12,7 @@ import java.util.List;
 public class EmployeeForm extends AbstractForm<Employee> {
   TextField name = new TextField("name");
   TextField username = new TextField("username");
-  private final ComboBox<EmployeeRole> role = new ComboBox("status");
+  private final ComboBox<EmployeeRole> role = new ComboBox("role");
   PasswordField password = new PasswordField("password");
 
 
