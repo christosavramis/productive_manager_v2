@@ -3,6 +3,7 @@ package com.example.application.backend.service;
 import com.example.application.backend.data.AuditType;
 import com.example.application.backend.data.entities.Audit;
 import com.vaadin.flow.component.upload.receivers.MultiFileMemoryBuffer;
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,10 +24,12 @@ public class ImageService {
     public String saveImage(String name, String saveName, MultiFileMemoryBuffer buffer) {
         String location = "";
         try {
-            location = IMAGE_FOLDER_PATH_DISPLAY + saveName;
-            File outputFile = new File(IMAGE_FOLDER_PATH_SAVE + saveName);
-            BufferedImage inputImage = ImageIO.read(buffer.getInputStream(name));
-            ImageIO.write(inputImage, "png", outputFile);
+//            location = IMAGE_FOLDER_PATH_DISPLAY + saveName;
+//            File outputFile = new File(IMAGE_FOLDER_PATH_SAVE + saveName);
+//            BufferedImage inputImage = ImageIO.read(buffer.getInputStream(name));
+//            ImageIO.write(inputImage, "png", outputFile);
+
+            location = "data:image/png;base64," + Base64.encodeBase64String(buffer.getInputStream(name).readAllBytes());
             auditService.save(new Audit(LocalDateTime.now(),"created new image " + name, AuditType.INFO), this.getClass());
         } catch (IOException e) {
             auditService.save(new Audit(LocalDateTime.now(), e.getMessage(), AuditType.ERROR), this.getClass());
