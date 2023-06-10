@@ -120,15 +120,30 @@ public class OrderForm extends AbstractForm<Order> {
 
   public void payOrder() {
       try {
-          getBinder().writeBean(getFormObject());
+          Order order = getFormObject();
+          getBinder().writeBean(order);
+          if (order.getCustomer() == null) {
+              order.setCustomer(customerSupplier.get().get(0));
+          }
+          Notification.show("Order paid!").addThemeVariants(NotificationVariant.LUMO_SUCCESS);
+          fireEvent(new OrderView.PayEvent(this, getFormObject()));
       } catch (ValidationException e) {
           auditService.save(new Audit(LocalDateTime.now(), e.getMessage(), AuditType.ERROR), this.getClass());
       }
-      Notification.show("Order paid!").addThemeVariants(NotificationVariant.LUMO_SUCCESS);
-      fireEvent(new OrderView.PayEvent(this, getFormObject()));
+
   }
 
-  public void cancelOrder() {
+  @Override
+  public void validateAndSave() {
+      Order order = getFormObject();
+      if (order != null && order.getCustomer() == null) {
+          order.setCustomer(customerSupplier.get().get(0));
+      }
+      super.validateAndSave();
+  }
+
+
+      public void cancelOrder() {
       try {
           getBinder().writeBean(getFormObject());
       } catch (ValidationException e) {

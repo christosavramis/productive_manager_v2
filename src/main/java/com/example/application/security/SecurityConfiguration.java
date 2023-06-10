@@ -64,21 +64,6 @@ public class SecurityConfiguration extends VaadinWebSecurityConfigurerAdapter {
      * in memory users and their roles.
      * NOTE: This should not be used in real world applications.
      */
-//    @Bean
-//    @Override
-//    public UserDetailsService userDetailsService() {
-//        UserDetails user =
-//                User.withUsername("user")
-//                        .password("{noop}user")
-//                        .roles("USER")
-//                        .build();
-//        UserDetails admin =
-//                User.withUsername("admin")
-//                        .password("{noop}admin")
-//                        .roles("ADMIN")
-//                        .build();
-//        return new InMemoryUserDetailsManager(user, admin);
-//    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

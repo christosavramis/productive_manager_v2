@@ -32,6 +32,7 @@ public class OrderService extends AbstractService<Order> {
     }
 
     public  Order pay(Order order){
+        order.calcPrice();
         order.close();
         order.setStatus(OrderStatus.PAID);
         order.getProducts().forEach(orderProduct ->
