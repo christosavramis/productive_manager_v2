@@ -19,6 +19,7 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 class ProductOrderMaker extends VerticalLayout {
     private final Grid<OrderProduct> orderProductGrid = new Grid<>();

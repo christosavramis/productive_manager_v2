@@ -19,15 +19,7 @@ public class OrderService extends AbstractService<Order> {
 
     public Order save(Order order){
         order.calcPrice();
-
-        if (OrderStatus.PAID.equals(order.getStatus())) {
-            order.getProducts().forEach(orderProduct ->
-                    productRepository.findById(orderProduct.getProduct().getId()).ifPresent(product -> {
-                        product.setQuantity(product.getQuantity() - orderProduct.getQuantity());
-                        productRepository.save(product);
-                    })
-            );
-        }
+        order.close();
         return super.save(order);
     }
 

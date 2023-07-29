@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.function.Predicate.not;
+
 @Service
 public class ProductService extends AbstractService<Product> {
 
@@ -26,6 +28,6 @@ public class ProductService extends AbstractService<Product> {
     }
 
     public List<Product> findAllEnabled() {
-        return super.findAll().stream().filter(Product::isEnabled).collect(Collectors.toList());
+        return super.findAll().stream().filter(Product::isEnabled).filter(not(Product::isMarkedForDelete)).collect(Collectors.toList());
     }
 }
